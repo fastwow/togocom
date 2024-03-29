@@ -303,7 +303,7 @@ const Show = ({ onDrawCompleted, values, date, prize, shortCode }) => {
     const timeout = setTimeout(() => {
       console.log("Draw completed");
       onDrawCompleted();
-    }, 5000);
+    }, 4000);
     return () => clearTimeout(timeout);
   }, [onDrawCompleted]);
 
