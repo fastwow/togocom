@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 
-export const CellRow = ({ values }) => {
+export const CellRow = ({ values, size, onAnimateFinished }) => {
   // convert string values to array of number
   const valuesToRender = React.useMemo(() => {
     const result = values.split("").map((value) => parseInt(value));
@@ -13,32 +13,19 @@ export const CellRow = ({ values }) => {
     return result;
   }, [values]);
 
-  // const [itemToRender, setItemToRender] = React.useState([]);
+  const [itemToRender, setItemToRender] = React.useState([]);
 
-  // React.useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setItemToRender((itemToRender) => {
-  //       if (itemToRender.length < valuesToRender.length) {
-  //         return valuesToRender.slice(0, itemToRender.length + 1);
-  //       }
-  //       return itemToRender;
-  //     });
-  //   }, 400);
-
-  //   return () => clearInterval(interval);
-  // }, [valuesToRender]);
-
-  // const extectedValues = valuesToRender.length;
-  // const uiItems = React.useMemo(() => {
-  //   return [
-  //     ...itemToRender,
-  //     ...new Array(extectedValues - itemToRender.length).fill(0),
-  //   ];
-  // }, [itemToRender, extectedValues]);
-
-  // console.log(uiItems);
-
-  const uiItems = valuesToRender;
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setItemToRender((itemToRender) => {
+        if (itemToRender.length < valuesToRender.length) {
+          return valuesToRender.slice(0, itemToRender.length + 1);
+        }
+        return itemToRender;
+      });
+    }, 800);
+    return () => clearInterval(interval);
+  }, [valuesToRender]);
 
   return (
     <Box
@@ -50,16 +37,18 @@ export const CellRow = ({ values }) => {
         marginTop: 4,
       }}
     >
-      {uiItems.map((value, index) => (
-        <Box
-          // margin right 4
-          sx={{
-            marginRight: index < uiItems.length - 1 ? 4 : 0,
-          }}
-        >
-          <Cell value={value} />
-        </Box>
-      ))}
+      {Array(size)
+        .fill(0)
+        .map((_value, index) => (
+          <Box
+            // margin right 4
+            sx={{
+              marginRight: index < size - 1 ? 4 : 0,
+            }}
+          >
+            <Cell value={itemToRender[index]} />
+          </Box>
+        ))}
     </Box>
   );
 };
@@ -171,7 +160,7 @@ const CellRows = ({ values }) => {
         }}
       >
         {ui.map((value, index) => (
-          <CellRow values={value} />
+          <CellRow values={value} size={8} />
         ))}
       </Box>
     </Box>
