@@ -198,7 +198,7 @@ const PrizeInfo = ({ values, date }) => {
   );
 };
 
-const DailyPrize = () => {
+const DailyPrize = ({ onDrawCompleted }) => {
   const values = [
     [1, 2, 3, 4, 5, 6, undefined, undefined],
     [1, 2, 3, 4, 5, 6, undefined, undefined],
@@ -207,6 +207,15 @@ const DailyPrize = () => {
   ];
   const date = "29/03/2024";
   const shortCode = "909";
+
+  // write timeout to simulate the draw 5 seconds
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      console.log("Draw completed");
+      onDrawCompleted();
+    }, 2000);
+    return () => clearTimeout(timeout);
+  }, [onDrawCompleted]);
 
   return (
     <Box

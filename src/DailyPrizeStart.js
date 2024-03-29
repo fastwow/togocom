@@ -138,7 +138,9 @@ const PrizeInfo = ({ onStart, prizes }) => {
             backgroundColor: "white",
             borderColor: "red",
             borderWidth: 2,
-            fontSize: 18,
+            fontSize: 24,
+            // bold
+            fontWeight: "bold",
             "&:hover": {
               backgroundColor: "#E1E1E1",
               borderColor: "red",
@@ -154,11 +156,7 @@ const PrizeInfo = ({ onStart, prizes }) => {
   );
 };
 
-const DailyPrizeStart = () => {
-  const onStart = () => {
-    console.log("Start the game");
-  };
-
+const DailyPrizeStart = ({ onStart }) => {
   const prizes = [
     "Grand Prix: une voiture SUV BAIC X35!",
     "Samsung A24+6Go de data",

@@ -172,7 +172,7 @@ const PrizeInfo = ({ values, date }) => {
   );
 };
 
-const DailyPrize = () => {
+const DailyPrize = ({ onDrawResultsCompleted }) => {
   const values = ["123456", "123456", "123456", "123456"];
   const date = "29/03/2024";
   const shortCode = "909";
@@ -182,6 +182,19 @@ const DailyPrize = () => {
           000 FCFA`;
 
   const { width, height } = useWindowSize();
+
+  // write timeout to simulate the draw 5 seconds
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      console.log("Draw completed");
+      onDrawResultsCompleted();
+    }, 2000);
+    return () => clearTimeout(timeout);
+  }, [onDrawResultsCompleted]);
+
+  const onConfettiComplete = React.useCallback(() => {
+    onDrawResultsCompleted();
+  }, [onDrawResultsCompleted]);
 
   return (
     <Box
@@ -272,8 +285,9 @@ const DailyPrize = () => {
       <Confetti
         width={width}
         height={height}
-        numberOfPieces={500}
-        tweenDuration={10000}
+        numberOfPieces={1000}
+        tweenDuration={1000}
+        onConfettiComplete={onConfettiComplete}
       />
     </Box>
   );
