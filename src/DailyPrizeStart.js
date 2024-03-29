@@ -137,20 +137,130 @@ const PrizeInfo = ({ onStart, prizes }) => {
             paddingRight: 8,
             backgroundColor: "white",
             borderColor: "red",
-            borderWidth: 2,
+            borderWidth: 3,
+            borderRadius: 3,
             fontSize: 24,
             // bold
             fontWeight: "bold",
             "&:hover": {
               backgroundColor: "#E1E1E1",
               borderColor: "red",
-              borderWidth: 2,
+              borderWidth: 3,
+              borderRadius: 3,
               boxShadow: "none",
             },
           }}
         >
           Commencer
         </Button>
+      </Box>
+
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          marginTop: 4,
+          // add spacing between items
+          gap: 0.5,
+          // add wave effect to children. first becomer bigger, that second item become bigger and first smaller. and so on. from left item to right item. infinite animatin. apply to all children
+          "& > *": {
+            animation: "wave 1s infinite",
+          },
+          // define the wave effect
+          "@keyframes wave": {
+            "0%": {
+              transform: "scale(1)",
+            },
+            "50%": {
+              transform: "scale(1.2)",
+            },
+            "100%": {
+              transform: "scale(1)",
+            },
+          },
+        }}
+      >
+        <Box
+          sx={{
+            backgroundColor: "white",
+            width: 12,
+            height: 42,
+            alignContent: "center",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            borderColor: "red",
+            borderRadius: 1,
+            borderWidth: 2,
+            borderStyle: "solid",
+            boxShadow: 4,
+          }}
+        />
+        <Box
+          sx={{
+            backgroundColor: "white",
+            width: 12,
+            height: 42,
+            alignContent: "center",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            borderColor: "red",
+            borderRadius: 1,
+            borderWidth: 2,
+            borderStyle: "solid",
+            boxShadow: 4,
+          }}
+        />
+        <Box
+          sx={{
+            backgroundColor: "white",
+            width: 12,
+            height: 42,
+            alignContent: "center",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            borderColor: "red",
+            borderRadius: 1,
+            borderWidth: 2,
+            borderStyle: "solid",
+            boxShadow: 4,
+          }}
+        />
+        <Box
+          sx={{
+            backgroundColor: "white",
+            width: 12,
+            height: 42,
+            alignContent: "center",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            borderColor: "red",
+            borderRadius: 1,
+            borderWidth: 2,
+            borderStyle: "solid",
+            boxShadow: 4,
+          }}
+        />
+        <Box
+          sx={{
+            backgroundColor: "white",
+            width: 12,
+            height: 42,
+            alignContent: "center",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            borderColor: "red",
+            borderRadius: 1,
+            borderWidth: 2,
+            borderStyle: "solid",
+            boxShadow: 4,
+          }}
+        />
       </Box>
     </Box>
   );
