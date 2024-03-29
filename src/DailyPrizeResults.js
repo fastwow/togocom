@@ -86,7 +86,7 @@ const Winner = ({ value }) => {
           letterSpacing: "0.10em",
         }}
       >
-        {"123456"}
+        {value}
       </Typography>
     </Box>
   );
@@ -172,15 +172,13 @@ const PrizeInfo = ({ values, date }) => {
   );
 };
 
-const DailyPrize = ({ onDrawResultsCompleted }) => {
-  const values = ["123456", "123456", "123456", "123456"];
-  const date = "29/03/2024";
-  const shortCode = "909";
-  const notes = `
-  Félicitations! Tu as gagné Airtime d'une valeur de 5000 FCFA du jeu
-          "Fan Foot"! Tu recevras automatiquement une dotation de crédit de 5
-          000 FCFA`;
-
+const DailyPrize = ({
+  onDrawResultsCompleted,
+  date,
+  values,
+  shortCode,
+  notes,
+}) => {
   const { width, height } = useWindowSize();
 
   // write timeout to simulate the draw 5 seconds
@@ -188,7 +186,7 @@ const DailyPrize = ({ onDrawResultsCompleted }) => {
     const timeout = setTimeout(() => {
       console.log("Draw completed");
       onDrawResultsCompleted();
-    }, 2000);
+    }, 6000);
     return () => clearTimeout(timeout);
   }, [onDrawResultsCompleted]);
 
@@ -286,7 +284,7 @@ const DailyPrize = ({ onDrawResultsCompleted }) => {
         width={width}
         height={height}
         numberOfPieces={1000}
-        tweenDuration={1000}
+        tweenDuration={10000}
         onConfettiComplete={onConfettiComplete}
       />
     </Box>

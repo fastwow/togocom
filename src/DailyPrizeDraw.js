@@ -88,6 +88,16 @@ const Cell = ({ value }) => {
 };
 
 const CellRow = ({ values }) => {
+  // convert string values to array of number
+  const valuesToRender = React.useMemo(() => {
+    const result = values.split("").map((value) => parseInt(value));
+
+    result.push(undefined);
+    result.push(undefined);
+
+    return result;
+  }, [values]);
+
   return (
     <Box
       sx={{
@@ -98,11 +108,11 @@ const CellRow = ({ values }) => {
         marginTop: 4,
       }}
     >
-      {values.map((value, index) => (
+      {valuesToRender.map((value, index) => (
         <Box
           // margin right 4
           sx={{
-            marginRight: index < values.length - 1 ? 4 : 0,
+            marginRight: index < valuesToRender.length - 1 ? 4 : 0,
           }}
         >
           <Cell value={value} />
@@ -198,17 +208,7 @@ const PrizeInfo = ({ values, date }) => {
   );
 };
 
-const DailyPrize = ({ onDrawCompleted }) => {
-  const values = [
-    [1, 2, 3, 4, 5, 6, undefined, undefined],
-    [1, 2, 3, 4, 5, 6, undefined, undefined],
-    [1, 2, 3, 4, 5, 6, undefined, undefined],
-    [1, 2, 3, 4, 5, 6, undefined, undefined],
-  ];
-  const date = "29/03/2024";
-  const shortCode = "909";
-
-  // write timeout to simulate the draw 5 seconds
+const DailyPrize = ({ onDrawCompleted, values, date, shortCode }) => {
   React.useEffect(() => {
     const timeout = setTimeout(() => {
       console.log("Draw completed");

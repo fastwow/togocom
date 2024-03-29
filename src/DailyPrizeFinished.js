@@ -83,7 +83,7 @@ const Winner = ({ value }) => {
           letterSpacing: "0.10em",
         }}
       >
-        {"123456"}
+        {value}
       </Typography>
     </Box>
   );
@@ -223,10 +223,7 @@ const PrizeInfo = ({ values, prize, date }) => {
   );
 };
 
-const DailyPrize = ({ onDrawResultsCompleted }) => {
-  const values = ["123456", "123456", "123456", "123456"];
-  const date = "29/03/2024";
-  const shortCode = "909";
+const DailyPrize = ({ date, shortCode, values }) => {
   const prize = "Airtime 5000 FCFA chacun";
 
   return (

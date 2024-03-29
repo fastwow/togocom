@@ -55,7 +55,7 @@ const Logo = () => {
   );
 };
 
-const PrizeInfo = ({ onStart, prizes }) => {
+const PrizeInfo = ({ onStart, prizes, isPending }) => {
   return (
     <Box
       sx={{
@@ -130,20 +130,22 @@ const PrizeInfo = ({ onStart, prizes }) => {
           variant="outlined"
           onClick={onStart}
           sx={{
-            color: "black",
+            color: isPending ? "white" : "black",
             paddingTop: 1,
             paddingBottom: 1,
             paddingLeft: 8,
             paddingRight: 8,
-            backgroundColor: "white",
+            backgroundColor: isPending ? "red" : "white",
             borderColor: "red",
+            disabled: isPending,
             borderWidth: 3,
             borderRadius: 3,
             fontSize: 24,
             // bold
             fontWeight: "bold",
             "&:hover": {
-              backgroundColor: "#E1E1E1",
+              backgroundColor: "red",
+              color: "white",
               borderColor: "red",
               borderWidth: 3,
               borderRadius: 3,
@@ -155,123 +157,134 @@ const PrizeInfo = ({ onStart, prizes }) => {
         </Button>
       </Box>
 
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          marginTop: 4,
-          // add spacing between items
-          gap: 0.5,
-          // add wave effect to children. first becomer bigger, that second item become bigger and first smaller. and so on. from left item to right item. infinite animatin. apply to all children
-          "& > *": {
-            animation: "wave 1s infinite",
-          },
-          // define the wave effect
-          "@keyframes wave": {
-            "0%": {
-              transform: "scale(1)",
+      {isPending ? (
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            marginTop: 4,
+            // add spacing between items
+            gap: 0.5,
+            // add wave effect to children. first becomer bigger, that second item become bigger and first smaller. and so on. from left item to right item. infinite animatin. apply to all children
+            "& > *": {
+              animation: "wave 1s infinite",
             },
-            "50%": {
-              transform: "scale(1.2)",
+            // define the wave effect
+            "@keyframes wave": {
+              "0%": {
+                transform: "scale(1)",
+              },
+              "50%": {
+                transform: "scale(1.2)",
+              },
+              "100%": {
+                transform: "scale(1)",
+              },
             },
-            "100%": {
-              transform: "scale(1)",
-            },
-          },
-        }}
-      >
-        <Box
-          sx={{
-            backgroundColor: "white",
-            width: 12,
-            height: 42,
-            alignContent: "center",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            borderColor: "red",
-            borderRadius: 1,
-            borderWidth: 2,
-            borderStyle: "solid",
-            boxShadow: 4,
           }}
-        />
-        <Box
-          sx={{
-            backgroundColor: "white",
-            width: 12,
-            height: 42,
-            alignContent: "center",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            borderColor: "red",
-            borderRadius: 1,
-            borderWidth: 2,
-            borderStyle: "solid",
-            boxShadow: 4,
-          }}
-        />
-        <Box
-          sx={{
-            backgroundColor: "white",
-            width: 12,
-            height: 42,
-            alignContent: "center",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            borderColor: "red",
-            borderRadius: 1,
-            borderWidth: 2,
-            borderStyle: "solid",
-            boxShadow: 4,
-          }}
-        />
-        <Box
-          sx={{
-            backgroundColor: "white",
-            width: 12,
-            height: 42,
-            alignContent: "center",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            borderColor: "red",
-            borderRadius: 1,
-            borderWidth: 2,
-            borderStyle: "solid",
-            boxShadow: 4,
-          }}
-        />
-        <Box
-          sx={{
-            backgroundColor: "white",
-            width: 12,
-            height: 42,
-            alignContent: "center",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            borderColor: "red",
-            borderRadius: 1,
-            borderWidth: 2,
-            borderStyle: "solid",
-            boxShadow: 4,
-          }}
-        />
-      </Box>
+        >
+          <Box
+            sx={{
+              backgroundColor: "white",
+              width: 12,
+              height: 42,
+              alignContent: "center",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              borderColor: "red",
+              borderRadius: 1,
+              borderWidth: 2,
+              borderStyle: "solid",
+              boxShadow: 4,
+            }}
+          />
+          <Box
+            sx={{
+              backgroundColor: "white",
+              width: 12,
+              height: 42,
+              alignContent: "center",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              borderColor: "red",
+              borderRadius: 1,
+              borderWidth: 2,
+              borderStyle: "solid",
+              boxShadow: 4,
+            }}
+          />
+          <Box
+            sx={{
+              backgroundColor: "white",
+              width: 12,
+              height: 42,
+              alignContent: "center",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              borderColor: "red",
+              borderRadius: 1,
+              borderWidth: 2,
+              borderStyle: "solid",
+              boxShadow: 4,
+            }}
+          />
+          <Box
+            sx={{
+              backgroundColor: "white",
+              width: 12,
+              height: 42,
+              alignContent: "center",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              borderColor: "red",
+              borderRadius: 1,
+              borderWidth: 2,
+              borderStyle: "solid",
+              boxShadow: 4,
+            }}
+          />
+          <Box
+            sx={{
+              backgroundColor: "white",
+              width: 12,
+              height: 42,
+              alignContent: "center",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              borderColor: "red",
+              borderRadius: 1,
+              borderWidth: 2,
+              borderStyle: "solid",
+              boxShadow: 4,
+            }}
+          />
+        </Box>
+      ) : undefined}
     </Box>
   );
 };
 
-const DailyPrizeStart = ({ onStart }) => {
-  const prizes = [
-    "Grand Prix: une voiture SUV BAIC X35!",
-    "Samsung A24+6Go de data",
-    "Airtime 5000 FCFA chacun",
-  ];
+const DailyPrizeStart = ({ onStart, prizes }) => {
+  const [isPending, setIsPending] = React.useState(false);
+  React.useEffect(() => {
+    if (isPending) {
+      const timeout = setTimeout(() => {
+        console.log("Draw completed");
+        onStart();
+      }, 3000);
+      return () => clearTimeout(timeout);
+    }
+  }, [isPending, onStart]);
+
+  const onStartClick = React.useCallback(() => {
+    setIsPending(true);
+  }, []);
 
   return (
     <Box
@@ -313,7 +326,11 @@ const DailyPrizeStart = ({ onStart }) => {
           justifyContent: "center",
         }}
       >
-        <PrizeInfo onStart={onStart} prizes={prizes} />
+        <PrizeInfo
+          onStart={onStartClick}
+          prizes={prizes}
+          isPending={isPending}
+        />
       </Box>
     </Box>
   );
