@@ -1,6 +1,9 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
+import useWindowSize from "react-use/lib/useWindowSize";
+import Confetti from "react-confetti";
 
 const ShortCode = ({ code }) => {
   return (
@@ -111,12 +114,12 @@ const Winners = ({ values }) => {
   );
 };
 
-const PrizeInfo = ({ values, prize, date }) => {
+const PrizeInfo = ({ values, date }) => {
   return (
     <Box
       sx={{
         padding: 2,
-        marginTop: 4,
+        marginTop: 16,
       }}
     >
       <Box
@@ -128,15 +131,17 @@ const PrizeInfo = ({ values, prize, date }) => {
           lineHeight: "64px",
           paddingLeft: 4,
           paddingRight: 4,
+          textDecoration: "underline",
         }}
       >
         Jeu Fan Foot
       </Box>
       <Box
         sx={{
-          fontSize: 32,
+          fontSize: 24,
           fontWeight: "bold",
           color: "black",
+          marginTop: -2,
           textAlign: "center",
           lineHeight: "64px",
           paddingLeft: 4,
@@ -145,62 +150,6 @@ const PrizeInfo = ({ values, prize, date }) => {
       >
         {date}
       </Box>
-      <Box
-        sx={{
-          fontSize: 48,
-          fontWeight: "bold",
-          color: "black",
-          textAlign: "center",
-          lineHeight: "64px",
-          paddingLeft: 4,
-          paddingRight: 4,
-        }}
-      >
-        Félicitations!
-      </Box>
-      <Box
-        sx={{
-          fontSize: 32,
-          fontWeight: "bold",
-          color: "black",
-          textAlign: "center",
-          lineHeight: "64px",
-          paddingLeft: 4,
-          paddingRight: 4,
-        }}
-      >
-        Pour plus d'informations, consulte: togocom.tg
-      </Box>
-      <Box
-        sx={{
-          fontSize: 32,
-          fontWeight: "bold",
-          color: "black",
-          textAlign: "center",
-          lineHeight: "64px",
-          paddingLeft: 4,
-          paddingRight: 4,
-          textDecoration: "underline",
-        }}
-      >
-        Les gagnants du concours Jeu Fan Foot:  
-      </Box>
-
-      <Box
-        sx={{
-          fontSize: 36,
-          fontWeight: "bold",
-          color: "black",
-          textAlign: "center",
-          lineHeight: "64px",
-          marginTop: 4,
-          paddingLeft: 4,
-          paddingRight: 4,
-        }}
-      >
-        {prize}
-      </Box>
-
       <Box
         sx={{
           // align content to center
@@ -223,8 +172,27 @@ const PrizeInfo = ({ values, prize, date }) => {
   );
 };
 
-const DailyPrize = ({ date, shortCode, values }) => {
-  const prize = "Airtime 5000 FCFA chacun";
+const Results = ({
+  onDrawResultsCompleted,
+  date,
+  values,
+  shortCode,
+  notes,
+}) => {
+  const { width, height } = useWindowSize();
+
+  // write timeout to simulate the draw 5 seconds
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      console.log("Draw completed");
+      onDrawResultsCompleted();
+    }, 10000);
+    return () => clearTimeout(timeout);
+  }, [onDrawResultsCompleted]);
+
+  const onConfettiComplete = React.useCallback(() => {
+    onDrawResultsCompleted();
+  }, [onDrawResultsCompleted]);
 
   return (
     <Box
@@ -266,10 +234,61 @@ const DailyPrize = ({ date, shortCode, values }) => {
           justifyContent: "center",
         }}
       >
-        <PrizeInfo values={values} date={date} prize={prize} />
+        <PrizeInfo values={values} date={date} />
       </Box>
+      <Box
+        sx={{
+          position: "absolute",
+          // center bottom
+          bottom: 0,
+          left: 0,
+          right: 0,
+          alignItems: "center",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Box
+          sx={{
+            backgroundColor: "white",
+            marginBottom: 8,
+            width: "100%",
+          }}
+        >
+          <Box
+            sx={{
+              fontSize: 24,
+              fontWeight: "bold",
+              color: "black",
+              textAlign: "center",
+              width: "100%",
+              lineHeight: "64px",
+              // make this text moving from left to right by circular motion over the screen with the same speed the start and at the end
+              animation: "move 10s linear infinite",
+              // make this text moving from left to right by circular motion over the screen with the same speed the start and at the end
+              "@keyframes move": {
+                "0%": {
+                  transform: "translateX(-100%)",
+                },
+                "100%": {
+                  transform: "translateX(100%)",
+                },
+              },
+            }}
+          >
+            {notes}
+          </Box>
+        </Box>
+      </Box>
+      <Confetti
+        width={width}
+        height={height}
+        numberOfPieces={1000}
+        tweenDuration={10000}
+        onConfettiComplete={onConfettiComplete}
+      />
     </Box>
   );
 };
 
-export default DailyPrize;
+export default Results;

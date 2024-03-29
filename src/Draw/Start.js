@@ -114,7 +114,7 @@ const PrizeInfo = ({ onStart, prizes, isPending }) => {
             paddingRight: 4,
           }}
         >
-          {prize}
+          {prize.title}
         </Box>
       ))}
 
@@ -270,7 +270,7 @@ const PrizeInfo = ({ onStart, prizes, isPending }) => {
   );
 };
 
-const DailyPrizeStart = ({ onStart, prizes }) => {
+const Start = ({ onStart, prizes }) => {
   const [isPending, setIsPending] = React.useState(false);
   React.useEffect(() => {
     if (isPending) {
@@ -336,4 +336,4 @@ const DailyPrizeStart = ({ onStart, prizes }) => {
   );
 };
 
-export default DailyPrizeStart;
+export default Start;

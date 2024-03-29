@@ -1,6 +1,5 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
 
 const ShortCode = ({ code }) => {
@@ -56,12 +55,11 @@ const Logo = () => {
   );
 };
 
-const Cell = ({ value }) => {
+const Winner = ({ value }) => {
   return (
     <Box
       sx={{
-        backgroundColor: "white",
-        width: 56,
+        backgroundColor: "red",
         height: 76,
         alignContent: "center",
         display: "flex",
@@ -78,7 +76,11 @@ const Cell = ({ value }) => {
         variant="h2"
         sx={{
           fontWeight: "bold",
-          color: "red",
+          color: "white",
+          paddingLeft: 6,
+          paddingRight: 6,
+          // spacing between characters
+          letterSpacing: "0.10em",
         }}
       >
         {value}
@@ -87,52 +89,39 @@ const Cell = ({ value }) => {
   );
 };
 
-const CellRow = ({ values }) => {
-  // convert string values to array of number
-  const valuesToRender = React.useMemo(() => {
-    const result = values.split("").map((value) => parseInt(value));
-
-    result.push(undefined);
-    result.push(undefined);
-
-    return result;
-  }, [values]);
-
+const Winners = ({ values }) => {
   return (
     <Box
       sx={{
         display: "flex",
-        flexDirection: "row",
-        justifyContent: "center",
         alignItems: "center",
-        marginTop: 4,
+        flexDirection: "column",
       }}
     >
-      {valuesToRender.map((value, index) => (
+      {values.map((value, index) => (
         <Box
-          // margin right 4
           sx={{
-            marginRight: index < valuesToRender.length - 1 ? 4 : 0,
+            marginBottom: index === values.length - 1 ? 0 : 4,
           }}
         >
-          <Cell value={value} />
+          <Winner value={value} />
         </Box>
       ))}
     </Box>
   );
 };
 
-const PrizeInfo = ({ values, date }) => {
+const PrizeInfo = ({ values, prize, date }) => {
   return (
     <Box
       sx={{
         padding: 2,
-        marginTop: 16,
+        marginTop: 4,
       }}
     >
       <Box
         sx={{
-          fontSize: 36,
+          fontSize: 48,
           fontWeight: "bold",
           color: "black",
           textAlign: "center",
@@ -145,7 +134,7 @@ const PrizeInfo = ({ values, date }) => {
       </Box>
       <Box
         sx={{
-          fontSize: 48,
+          fontSize: 32,
           fontWeight: "bold",
           color: "black",
           textAlign: "center",
@@ -158,21 +147,7 @@ const PrizeInfo = ({ values, date }) => {
       </Box>
       <Box
         sx={{
-          fontSize: 24,
-          fontWeight: "bold",
-          color: "red",
-          textAlign: "center",
-          lineHeight: "64px",
-          paddingLeft: 4,
-          paddingRight: 4,
-        }}
-      >
-        Lots:
-      </Box>
-      <Box
-        sx={{
-          fontSize: 24,
-          marginTop: -3,
+          fontSize: 48,
           fontWeight: "bold",
           color: "black",
           textAlign: "center",
@@ -181,8 +156,51 @@ const PrizeInfo = ({ values, date }) => {
           paddingRight: 4,
         }}
       >
-        Airtime 5000 FCFA chacun
+        Félicitations!
       </Box>
+      <Box
+        sx={{
+          fontSize: 32,
+          fontWeight: "bold",
+          color: "black",
+          textAlign: "center",
+          lineHeight: "64px",
+          paddingLeft: 4,
+          paddingRight: 4,
+        }}
+      >
+        Pour plus d'informations, consulte: togocom.tg
+      </Box>
+      <Box
+        sx={{
+          fontSize: 32,
+          fontWeight: "bold",
+          color: "black",
+          textAlign: "center",
+          lineHeight: "64px",
+          paddingLeft: 4,
+          paddingRight: 4,
+          textDecoration: "underline",
+        }}
+      >
+        Les gagnants du concours Jeu Fan Foot:  
+      </Box>
+
+      <Box
+        sx={{
+          fontSize: 36,
+          fontWeight: "bold",
+          color: "black",
+          textAlign: "center",
+          lineHeight: "64px",
+          marginTop: 4,
+          paddingLeft: 4,
+          paddingRight: 4,
+        }}
+      >
+        {prize.title}
+      </Box>
+
       <Box
         sx={{
           // align content to center
@@ -198,25 +216,14 @@ const PrizeInfo = ({ values, date }) => {
             flexDirection: "column",
           }}
         >
-          <CellRow values={values[0]} />
-          <CellRow values={values[1]} />
-          <CellRow values={values[2]} />
-          <CellRow values={values[3]} />
+          <Winners values={values} />
         </Box>
       </Box>
     </Box>
   );
 };
 
-const DailyPrize = ({ onDrawCompleted, values, date, shortCode }) => {
-  React.useEffect(() => {
-    const timeout = setTimeout(() => {
-      console.log("Draw completed");
-      onDrawCompleted();
-    }, 2000);
-    return () => clearTimeout(timeout);
-  }, [onDrawCompleted]);
-
+const Finished = ({ date, shortCode, values, prize }) => {
   return (
     <Box
       sx={{
@@ -257,10 +264,10 @@ const DailyPrize = ({ onDrawCompleted, values, date, shortCode }) => {
           justifyContent: "center",
         }}
       >
-        <PrizeInfo date={date} values={values} />
+        <PrizeInfo values={values} date={date} prize={prize} />
       </Box>
     </Box>
   );
 };
 
-export default DailyPrize;
+export default Finished;
