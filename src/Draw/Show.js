@@ -122,13 +122,14 @@ const PrizeInfo = ({ values, date, prize }) => {
 };
 
 const Show = ({ onDrawCompleted, values, date, prize, shortCode }) => {
+  const sizes = values.length;
   React.useEffect(() => {
     const timeout = setTimeout(() => {
       console.log("Draw completed");
       onDrawCompleted();
-    }, 4000);
+    }, sizes * 6800);
     return () => clearTimeout(timeout);
-  }, [onDrawCompleted]);
+  }, [onDrawCompleted, sizes]);
 
   return (
     <Box

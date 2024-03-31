@@ -2,10 +2,14 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 
-export const CellRow = ({ values, size, onAnimateFinished }) => {
+export const CellRow = React.memo(({ values, size, onAnimateFinished }) => {
   // convert string values to array of number
   const valuesToRender = React.useMemo(() => {
-    const result = values.split("").map((value) => parseInt(value));
+    const result = values?.split("").map((value) => parseInt(value));
+
+    if (!result?.length) {
+      return [];
+    }
 
     result.push(undefined);
     result.push(undefined);
@@ -26,6 +30,12 @@ export const CellRow = ({ values, size, onAnimateFinished }) => {
     }, 800);
     return () => clearInterval(interval);
   }, [valuesToRender]);
+
+  React.useEffect(() => {
+    if (itemToRender.length === valuesToRender.length) {
+      onAnimateFinished();
+    }
+  }, [itemToRender, valuesToRender, onAnimateFinished]);
 
   return (
     <Box
@@ -51,7 +61,7 @@ export const CellRow = ({ values, size, onAnimateFinished }) => {
         ))}
     </Box>
   );
-};
+});
 
 export const Cell = ({ value }) => {
   // value is number. i want create an animation drawing the number. number will be changing from 0 to value
@@ -111,37 +121,29 @@ export const Cell = ({ value }) => {
 const CellRows = ({ values }) => {
   const [source, setSource] = React.useState([]);
 
-  // React.useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setSource((source) => {
-  //       if (source.length < values.length) {
-  //         return values.slice(0, source.length + 1);
-  //       }
-  //       return source;
-  //     });
-  //   }, 1000);
+  const sourceEmpty = !source?.length;
+  React.useEffect(() => {
+    const interval = setInterval(
+      () => {
+        setSource((source) => {
+          console.log("inside setSource");
+          if (source.length < values.length) {
+            return values.slice(0, source.length + 1);
+          }
+          return source;
+        });
+      },
+      sourceEmpty ? 500 : 4800
+    );
 
-  //   return () => clearInterval(interval);
-  // }, [values]);
+    return () => clearInterval(interval);
+  }, [values, sourceEmpty]);
 
-  // console.log("CellRows");
+  const ui = source;
 
-  // const ui = React.useMemo(() => {
-  //   console.log(
-  //     "inside. source = " + source.length + " values = " + values.length
-  //   );
-  //   if (source.length < values.length) {
-  //     return [
-  //       ...source,
-  //       ...new Array(values.length - source.length).fill(undefined),
-  //     ];
-  //   }
-  //   return source;
-  // }, [source, values]);
-
-  // console.log(ui);
-
-  const ui = values;
+  const onAnimateFinished = React.useCallback(() => {
+    console.log("onAnimateFinished");
+  }, []);
 
   return (
     <Box
@@ -159,9 +161,15 @@ const CellRows = ({ values }) => {
           flexDirection: "column",
         }}
       >
-        {ui.map((value, index) => (
-          <CellRow values={value} size={8} />
-        ))}
+        {Array(values.length)
+          .fill(0)
+          .map((_value, index) => (
+            <CellRow
+              values={ui[index]}
+              size={8}
+              onAnimateFinished={onAnimateFinished}
+            />
+          ))}
       </Box>
     </Box>
   );

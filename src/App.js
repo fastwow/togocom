@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import DailyPrize from "./DailyPrize";
 import SuperPrize from "./SuperPrize";
 import WeeklyPrize from "./WeeklyPrize";
-import { CellRow } from "./Draw/CellRows";
+import CellRows from "./Draw/CellRows";
 
 const App = () => {
   const onAnimateFinished = React.useCallback(() => {
@@ -20,7 +20,6 @@ const App = () => {
         <Route path="*" element={<DailyPrize />} />
       </Routes>
     </Router>
-    // <CellRow values={"189"} size={8} onAnimateFinished={onAnimateFinished} />
   );
 };
 
