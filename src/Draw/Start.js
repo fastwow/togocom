@@ -165,23 +165,8 @@ const PrizeInfo = ({ onStart, prizes, isPending }) => {
             justifyContent: "center",
             marginTop: 4,
             // add spacing between items
-            gap: 0.5,
+            gap: 1,
             // add wave effect to children. first becomer bigger, that second item become bigger and first smaller. and so on. from left item to right item. infinite animatin. apply to all children
-            "& > *": {
-              animation: "wave 1s infinite",
-            },
-            // define the wave effect
-            "@keyframes wave": {
-              "0%": {
-                transform: "scale(1)",
-              },
-              "50%": {
-                transform: "scale(1.2)",
-              },
-              "100%": {
-                transform: "scale(1)",
-              },
-            },
           }}
         >
           <Box
@@ -198,13 +183,27 @@ const PrizeInfo = ({ onStart, prizes, isPending }) => {
               borderWidth: 2,
               borderStyle: "solid",
               boxShadow: 4,
+              // wave effect in loop. 1 second delay after every loop
+              animation: "wave 1s infinite 25ms",
+              // keyframes for wave effect
+              "@keyframes wave": {
+                "0%": {
+                  transform: "scale(1)",
+                },
+                "50%": {
+                  transform: "scale(1.5)",
+                },
+                "100%": {
+                  transform: "scale(1)",
+                },
+              },
             }}
           />
           <Box
             sx={{
               backgroundColor: "white",
               width: 12,
-              height: 42,
+              height: 38,
               alignContent: "center",
               display: "flex",
               justifyContent: "center",
@@ -214,13 +213,26 @@ const PrizeInfo = ({ onStart, prizes, isPending }) => {
               borderWidth: 2,
               borderStyle: "solid",
               boxShadow: 4,
+              // add wave effect to this item with delay 200 ms
+              animation: "wave 1s infinite 200ms",
+              "@keyframes wave": {
+                "0%": {
+                  transform: "scale(1)",
+                },
+                "50%": {
+                  transform: "scale(1.5)",
+                },
+                "100%": {
+                  transform: "scale(1)",
+                },
+              },
             }}
           />
           <Box
             sx={{
               backgroundColor: "white",
               width: 12,
-              height: 42,
+              height: 38,
               alignContent: "center",
               display: "flex",
               justifyContent: "center",
@@ -230,13 +242,25 @@ const PrizeInfo = ({ onStart, prizes, isPending }) => {
               borderWidth: 2,
               borderStyle: "solid",
               boxShadow: 4,
+              animation: "wave 1s infinite 375ms",
+              "@keyframes wave": {
+                "0%": {
+                  transform: "scale(1)",
+                },
+                "50%": {
+                  transform: "scale(1.5)",
+                },
+                "100%": {
+                  transform: "scale(1)",
+                },
+              },
             }}
           />
           <Box
             sx={{
               backgroundColor: "white",
               width: 12,
-              height: 42,
+              height: 38,
               alignContent: "center",
               display: "flex",
               justifyContent: "center",
@@ -246,13 +270,25 @@ const PrizeInfo = ({ onStart, prizes, isPending }) => {
               borderWidth: 2,
               borderStyle: "solid",
               boxShadow: 4,
+              animation: "wave 1s infinite 550ms",
+              "@keyframes wave": {
+                "0%": {
+                  transform: "scale(1)",
+                },
+                "50%": {
+                  transform: "scale(1.5)",
+                },
+                "100%": {
+                  transform: "scale(1)",
+                },
+              },
             }}
           />
           <Box
             sx={{
               backgroundColor: "white",
               width: 12,
-              height: 42,
+              height: 38,
               alignContent: "center",
               display: "flex",
               justifyContent: "center",
@@ -262,6 +298,18 @@ const PrizeInfo = ({ onStart, prizes, isPending }) => {
               borderWidth: 2,
               borderStyle: "solid",
               boxShadow: 4,
+              animation: "wave 1s infinite 700ms",
+              "@keyframes wave": {
+                "0%": {
+                  transform: "scale(1)",
+                },
+                "50%": {
+                  transform: "scale(1.5)",
+                },
+                "100%": {
+                  transform: "scale(1)",
+                },
+              },
             }}
           />
         </Box>
@@ -277,7 +325,7 @@ const Start = ({ onStart, prizes }) => {
       const timeout = setTimeout(() => {
         console.log("Draw completed");
         onStart();
-      }, 3000);
+      }, 4000);
       return () => clearTimeout(timeout);
     }
   }, [isPending, onStart]);
