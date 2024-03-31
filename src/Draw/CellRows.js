@@ -27,7 +27,7 @@ export const CellRow = React.memo(({ values, size, onAnimateFinished }) => {
         }
         return itemToRender;
       });
-    }, 800);
+    }, 1600);
     return () => clearInterval(interval);
   }, [valuesToRender]);
 
@@ -64,27 +64,38 @@ export const CellRow = React.memo(({ values, size, onAnimateFinished }) => {
 });
 
 export const Cell = ({ value }) => {
-  // value is number. i want create an animation drawing the number. number will be changing from 0 to value
-  // const [currentValue, setCurrentValue] = React.useState(
-  // value === undefined ? undefined : 0
-  // );
+  // do 2 loops from 0 to 9 and from 9 to 0 when showing the value. this draw
+  // the value in a circular way
 
-  // React.useEffect(() => {
-  //   if (value === undefined) {
-  //     return;
-  //   }
+  console.log(value);
 
-  //   const interval = setInterval(() => {
-  //     setCurrentValue((currentValue) => {
-  //       if (currentValue < value) {
-  //         return currentValue + 1;
-  //       }
-  //       return currentValue;
-  //     });
-  //   }, 200);
+  const [currentValue, setCurrentValue] = React.useState(-1);
 
-  //   return () => clearInterval(interval);
-  // }, [value]);
+  React.useEffect(() => {
+    let loop = 0;
+
+    if (value === undefined) {
+      return;
+    }
+
+    const interval = setInterval(() => {
+      setCurrentValue((currentValue) => {
+        // stop the interval when the loop is 3
+        if (loop === 2 && currentValue === value) {
+          clearInterval(interval);
+          return currentValue;
+        }
+
+        if (currentValue === 9) {
+          loop++;
+          return 0;
+        }
+        return (currentValue === -1 ? 0 : currentValue) + 1;
+      });
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, [value]);
 
   return (
     <Box
@@ -112,7 +123,7 @@ export const Cell = ({ value }) => {
           transition: "all 5s",
         }}
       >
-        {value}
+        {currentValue === -1 ? "" : currentValue}
       </Typography>
     </Box>
   );
@@ -133,7 +144,7 @@ const CellRows = ({ values }) => {
           return source;
         });
       },
-      sourceEmpty ? 500 : 4800
+      sourceEmpty ? 100 : 9600
     );
 
     return () => clearInterval(interval);

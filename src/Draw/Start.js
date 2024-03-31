@@ -185,6 +185,7 @@ const PrizeInfo = ({ onStart, prizes, isPending }) => {
               boxShadow: 4,
               // wave effect in loop. 1 second delay after every loop
               animation: "wave 1s infinite 25ms",
+              // add duration 100ms to wave effect
               // keyframes for wave effect
               "@keyframes wave": {
                 "0%": {
@@ -298,7 +299,7 @@ const PrizeInfo = ({ onStart, prizes, isPending }) => {
               borderWidth: 2,
               borderStyle: "solid",
               boxShadow: 4,
-              animation: "wave 1s infinite 700ms",
+              animation: "wave 1s infinite 725ms",
               "@keyframes wave": {
                 "0%": {
                   transform: "scale(1)",

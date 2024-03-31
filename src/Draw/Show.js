@@ -127,7 +127,7 @@ const Show = ({ onDrawCompleted, values, date, prize, shortCode }) => {
     const timeout = setTimeout(() => {
       console.log("Draw completed");
       onDrawCompleted();
-    }, sizes * 6800);
+    }, sizes * (sizes === 1 ? 12600 : 10500));
     return () => clearTimeout(timeout);
   }, [onDrawCompleted, sizes]);
 
