@@ -20,22 +20,27 @@ export const CellRow = React.memo(({ values, size, onAnimateFinished }) => {
   const [itemToRender, setItemToRender] = React.useState([]);
 
   React.useEffect(() => {
-    const interval = setInterval(() => {
-      setItemToRender((itemToRender) => {
-        if (itemToRender.length < valuesToRender.length) {
-          return valuesToRender.slice(0, itemToRender.length + 1);
-        }
-        return itemToRender;
-      });
-    }, 1600);
-    return () => clearInterval(interval);
+    setItemToRender((itemToRender) => {
+      if (
+        itemToRender.length === 0 &&
+        itemToRender.length < valuesToRender.length
+      ) {
+        return valuesToRender.slice(0, itemToRender.length + 1);
+      }
+      return itemToRender;
+    });
   }, [valuesToRender]);
 
-  React.useEffect(() => {
-    if (itemToRender.length === valuesToRender.length) {
-      onAnimateFinished();
-    }
-  }, [itemToRender, valuesToRender, onAnimateFinished]);
+  const onCellAnimateFinished = React.useCallback(() => {
+    setItemToRender((itemToRender) => {
+      if (itemToRender.length < valuesToRender.length) {
+        return valuesToRender.slice(0, itemToRender.length + 1);
+      } else {
+        onAnimateFinished();
+      }
+      return itemToRender;
+    });
+  }, [valuesToRender, onAnimateFinished]);
 
   return (
     <Box
@@ -56,20 +61,24 @@ export const CellRow = React.memo(({ values, size, onAnimateFinished }) => {
               marginRight: index < size - 1 ? 4 : 0,
             }}
           >
-            <Cell value={itemToRender[index]} />
+            <Cell
+              value={itemToRender[index]}
+              onAnimateFinished={onCellAnimateFinished}
+            />
           </Box>
         ))}
     </Box>
   );
 });
 
-export const Cell = ({ value }) => {
+export const Cell = ({ value, onAnimateFinished }) => {
   // do 2 loops from 0 to 9 and from 9 to 0 when showing the value. this draw
   // the value in a circular way
 
-  console.log(value);
-
   const [currentValue, setCurrentValue] = React.useState(-1);
+
+  // create reference to flag
+  const flag = React.useRef(false);
 
   React.useEffect(() => {
     let loop = 0;
@@ -81,8 +90,11 @@ export const Cell = ({ value }) => {
     const interval = setInterval(() => {
       setCurrentValue((currentValue) => {
         // stop the interval when the loop is 3
-        if (loop === 2 && currentValue === value) {
+        if (loop === 2 && currentValue === value && !flag.current) {
           clearInterval(interval);
+
+          onAnimateFinished();
+          flag.current = true;
           return currentValue;
         }
 
@@ -95,7 +107,7 @@ export const Cell = ({ value }) => {
     }, 100);
 
     return () => clearInterval(interval);
-  }, [value]);
+  }, [value, onAnimateFinished]);
 
   return (
     <Box
@@ -137,7 +149,6 @@ const CellRows = ({ values }) => {
     const interval = setInterval(
       () => {
         setSource((source) => {
-          console.log("inside setSource");
           if (source.length < values.length) {
             return values.slice(0, source.length + 1);
           }

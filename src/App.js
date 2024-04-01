@@ -6,10 +6,6 @@ import SuperPrize from "./SuperPrize";
 import WeeklyPrize from "./WeeklyPrize";
 
 const App = () => {
-  const onAnimateFinished = React.useCallback(() => {
-    console.log("onAnimateFinished");
-  }, []);
-
   return (
     <Router>
       <Routes>
