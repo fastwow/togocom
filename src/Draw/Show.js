@@ -55,7 +55,7 @@ const Logo = () => {
   );
 };
 
-const PrizeInfo = ({ values, date, prize }) => {
+const PrizeInfo = ({ values, date, prize, onAnimateFinished }) => {
   return (
     <Box
       sx={{
@@ -116,20 +116,16 @@ const PrizeInfo = ({ values, date, prize }) => {
       >
         {prize.title}
       </Box>
-      <CellRows values={values} />
+      <CellRows values={values} onAnimateFinished={onAnimateFinished} />
     </Box>
   );
 };
 
 const Show = ({ onDrawCompleted, values, date, prize, shortCode }) => {
-  const sizes = values.length;
-  React.useEffect(() => {
-    const timeout = setTimeout(() => {
-      console.log("Draw completed");
-      onDrawCompleted();
-    }, sizes * (sizes === 1 ? 12600 : 10700));
-    return () => clearTimeout(timeout);
-  }, [onDrawCompleted, sizes]);
+  const onAnimateFinished = React.useCallback(() => {
+    console.log("Animate finished");
+    onDrawCompleted();
+  }, [onDrawCompleted]);
 
   return (
     <Box
@@ -171,7 +167,12 @@ const Show = ({ onDrawCompleted, values, date, prize, shortCode }) => {
           justifyContent: "center",
         }}
       >
-        <PrizeInfo date={date} prize={prize} values={values} />
+        <PrizeInfo
+          date={date}
+          prize={prize}
+          values={values}
+          onAnimateFinished={onAnimateFinished}
+        />
       </Box>
     </Box>
   );

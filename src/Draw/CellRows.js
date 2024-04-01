@@ -32,10 +32,13 @@ export const CellRow = React.memo(({ values, size, onAnimateFinished }) => {
   }, [valuesToRender]);
 
   const onCellAnimateFinished = React.useCallback(() => {
+    console.log("cell animate finished");
     setItemToRender((itemToRender) => {
-      if (itemToRender.length < valuesToRender.length) {
+      if (itemToRender.length < valuesToRender.length - 2) {
+        console.log("celllrow animate next");
         return valuesToRender.slice(0, itemToRender.length + 1);
       } else {
+        console.log("cellrow animate finished");
         onAnimateFinished();
       }
       return itemToRender;
@@ -141,31 +144,32 @@ export const Cell = ({ value, onAnimateFinished }) => {
   );
 };
 
-const CellRows = ({ values }) => {
+const CellRows = ({ values, onAnimateFinished }) => {
   const [source, setSource] = React.useState([]);
 
-  const sourceEmpty = !source?.length;
   React.useEffect(() => {
-    const interval = setInterval(
-      () => {
-        setSource((source) => {
-          if (source.length < values.length) {
-            return values.slice(0, source.length + 1);
-          }
-          return source;
-        });
-      },
-      sourceEmpty ? 100 : 9600
-    );
+    setSource((itemToRender) => {
+      if (itemToRender.length === 0 && itemToRender.length < values.length) {
+        return values.slice(0, itemToRender.length + 1);
+      }
+      return itemToRender;
+    });
+  }, [values]);
 
-    return () => clearInterval(interval);
-  }, [values, sourceEmpty]);
+  const onCellRowsAnimateFinished = React.useCallback(() => {
+    console.log("onCellRowsAnimateFinished");
+    setSource((itemToRender) => {
+      if (itemToRender.length < values.length) {
+        console.log("itemToRender", itemToRender.length, values.length);
+        return values.slice(0, itemToRender.length + 1);
+      } else {
+        onAnimateFinished();
+      }
+      return itemToRender;
+    });
+  }, [values, onAnimateFinished]);
 
   const ui = source;
-
-  const onAnimateFinished = React.useCallback(() => {
-    console.log("onAnimateFinished");
-  }, []);
 
   return (
     <Box
@@ -189,7 +193,7 @@ const CellRows = ({ values }) => {
             <CellRow
               values={ui[index]}
               size={8}
-              onAnimateFinished={onAnimateFinished}
+              onAnimateFinished={onCellRowsAnimateFinished}
             />
           ))}
       </Box>
