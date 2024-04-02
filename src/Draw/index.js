@@ -2,9 +2,10 @@ import * as React from "react";
 import Results from "./Results";
 import Show from "./Show";
 import Start from "./Start";
+import Box from "@mui/material/Box";
 import Finished from "./Finished";
 
-const Draw = ({ lotteryData }) => {
+const Draw = ({ lotteryData, type, onChangeType }) => {
   const [state, setState] = React.useState("drawAnnouncement");
 
   const onStart = React.useCallback(() => {
@@ -20,13 +21,25 @@ const Draw = ({ lotteryData }) => {
   }, []);
 
   return (
-    <div>
+    <Box
+      // full screen
+      sx={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        display: "flex",
+      }}
+    >
       {state === "drawAnnouncement" && (
         <Start
           prizes={lotteryData.prizes}
           onStart={onStart}
           date={lotteryData.date}
           shortCode={lotteryData.shortCode}
+          type={type}
+          onChangeType={onChangeType}
         />
       )}
       {state === "drawStart" && (
@@ -55,7 +68,7 @@ const Draw = ({ lotteryData }) => {
           prize={lotteryData.currentPrize}
         />
       )}
-    </div>
+    </Box>
   );
 };
 

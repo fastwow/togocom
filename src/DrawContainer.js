@@ -2,7 +2,12 @@ import * as React from "react";
 import Draw from "./Draw";
 import { DAILY_PRIZES, WEEKLY_PRIZES, SUPER_PRIZES } from "./mocks";
 
-const DrawContainer = ({ type, date }) => {
+const DrawContainer = ({ originalType, date }) => {
+  const [type, setType] = React.useState(originalType);
+  const onChangeType = React.useCallback((t) => {
+    setType(t);
+  }, []);
+
   const lotteryData = React.useMemo(() => {
     if (type === "daily") {
       return DAILY_PRIZES[date];
@@ -14,7 +19,9 @@ const DrawContainer = ({ type, date }) => {
     }
   }, [type, date]);
 
-  return <Draw lotteryData={lotteryData} />;
+  return (
+    <Draw lotteryData={lotteryData} type={type} onChangeType={onChangeType} />
+  );
 };
 
 export default DrawContainer;

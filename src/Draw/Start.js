@@ -1,6 +1,10 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 const ShortCode = () => {
   return (
@@ -55,12 +59,26 @@ const Logo = () => {
   );
 };
 
-const PrizeInfo = ({ onStart, prizes, isPending }) => {
+const PrizeInfo = ({ onStart, prizes, isPending, type, onChangeType }) => {
+  const onChangeSelectType = React.useCallback(
+    (event) => {
+      onChangeType(event.target.value);
+    },
+    [onChangeType]
+  );
+
   return (
     <Box
       sx={{
         padding: 2,
         marginTop: 16,
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <Box
@@ -117,7 +135,6 @@ const PrizeInfo = ({ onStart, prizes, isPending }) => {
           {prize.title}
         </Box>
       ))}
-
       <Box
         sx={{
           // align content to center
@@ -156,7 +173,6 @@ const PrizeInfo = ({ onStart, prizes, isPending }) => {
           Commencer
         </Button>
       </Box>
-
       {isPending ? (
         <Box
           sx={{
@@ -315,11 +331,68 @@ const PrizeInfo = ({ onStart, prizes, isPending }) => {
           />
         </Box>
       ) : undefined}
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          color: "white",
+          fontSize: 24,
+          fontWeight: "bold",
+          textAlign: "center",
+          alignItems: "center",
+          display: "flex",
+          justifyContent: "center",
+          padding: 2,
+        }}
+      >
+        <Box sx={{ width: 200 }}>
+          <FormControl fullWidth>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={type}
+              color="error"
+              label=""
+              // change text color to red
+              sx={{
+                color: "white",
+                backgroundColor: "red",
+                // add border color to red
+                borderColor: "red",
+                // add border width to 2
+                borderWidth: 2,
+                // add border style to solid
+                borderStyle: "solid",
+                // add box shadow
+                boxShadow: 4,
+                textTransform: "uppercase",
+                // change font size to 24
+                // bold text
+                fontWeight: "bold",
+                borderRadius: 3,
+                // hover effect
+                "&:hover": {
+                  backgroundColor: "red",
+                  color: "white",
+                  borderColor: "red",
+                },
+              }}
+              onChange={onChangeSelectType}
+            >
+              <MenuItem value={"daily"}>DAILY</MenuItem>
+              <MenuItem value={"weekly"}>WEEKLY</MenuItem>
+              <MenuItem value={"super"}>SUPER</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+      </Box>
     </Box>
   );
 };
 
-const Start = ({ onStart, prizes }) => {
+const Start = ({ onStart, prizes, type, onChangeType }) => {
   const [isPending, setIsPending] = React.useState(false);
   React.useEffect(() => {
     if (isPending) {
@@ -379,6 +452,8 @@ const Start = ({ onStart, prizes }) => {
           onStart={onStartClick}
           prizes={prizes}
           isPending={isPending}
+          type={type}
+          onChangeType={onChangeType}
         />
       </Box>
     </Box>
