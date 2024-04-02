@@ -24,6 +24,8 @@ const getDataByData = async (date, type) => {
   });
 
   console.log(data);
+  console.log("date", date);
+  console.log("type", type);
 
   return data.find((item) => item.date === date && item.type === type);
 };
