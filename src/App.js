@@ -3,9 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Admin from "./Admin";
 import DrawContainer from "./DrawContainer";
 import { Box } from "@mui/material";
+import { formatDate } from "./format";
 
 const App = () => {
-  const date = new Date().toLocaleDateString();
+  const date = formatDate(new Date());
 
   return (
     <Box
