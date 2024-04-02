@@ -1,17 +1,22 @@
-import { DATA } from "./mocks";
+import mockApi from "./mockApi";
+import firebaseApi from "./firebaseApi";
+
+const isMock = true;
+
+const correntApi = isMock ? mockApi : firebaseApi;
 
 const getDataByData = async (data, type) => {
   console.log("getDataByData", data, type);
 
-  return DATA.find((d) => d.date === data && d.type === type);
+  return correntApi.getDataByData(data, type);
 };
 
 const getAllData = async () => {
-  return DATA;
+  return correntApi.getAllData();
 };
 
 const createItem = async (newItem) => {
-  DATA.push(newItem);
+  return correntApi.createItem(newItem);
 };
 
 const api = {

@@ -72,7 +72,7 @@ const Admin = () => {
                 <TableCell>Date</TableCell>
                 <TableCell>Type</TableCell>
                 <TableCell>Prize</TableCell>
-                <TableCell>Phone Number</TableCell>
+                <TableCell>Winners</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
