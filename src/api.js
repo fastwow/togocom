@@ -10,8 +10,13 @@ const getAllData = async () => {
   return DATA;
 };
 
+const createItem = async (newItem) => {
+  DATA.push(newItem);
+};
+
 const api = {
   getDataByData,
+  createItem,
   getAllData,
 };
 

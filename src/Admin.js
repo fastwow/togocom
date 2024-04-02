@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -9,24 +9,36 @@ import {
   Paper,
   Container,
   Box,
+  Button,
 } from "@mui/material";
+import AddNewItemDialog from "./AddNewItemDialog";
 import api from "./api";
 
 const Admin = () => {
-  const [data, setData] = React.useState([]);
+  const [data, setData] = useState([]);
+  const [openDialog, setOpenDialog] = useState(false);
 
-  React.useEffect(() => {
-    const fetchData = async () => {
-      const response = await api.getAllData();
-      setData(response);
-    };
+  useEffect(() => {
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    const response = await api.getAllData();
+    setData(response);
+  };
+
+  const handleAddItem = async (newItem) => {
+    await api.createItem({
+      ...newItem,
+      prizes: newItem.prizes.map((p) => ({ title: p })),
+    });
+    setOpenDialog(false);
+    fetchData();
+  };
 
   return (
     <Box
       sx={{
-        // full screen
         position: "fixed",
         top: 0,
         left: 0,
@@ -89,6 +101,16 @@ const Admin = () => {
             </TableBody>
           </Table>
         </TableContainer>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Button variant="contained" onClick={() => setOpenDialog(true)}>
+            Add New Item
+          </Button>
+        </Box>
+        <AddNewItemDialog
+          open={openDialog}
+          handleClose={() => setOpenDialog(false)}
+          handleAddItem={handleAddItem}
+        />
       </Container>
     </Box>
   );
