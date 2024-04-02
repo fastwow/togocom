@@ -1,7 +1,7 @@
 import mockApi from "./mockApi";
 import firebaseApi from "./firebaseApi";
 
-const isMock = true;
+const isMock = false;
 
 const correntApi = isMock ? mockApi : firebaseApi;
 
@@ -15,10 +15,8 @@ const mapItem = (itm) => {
   };
 };
 
-const getDataByData = async (data, type) => {
-  console.log("getDataByData", data, type);
-
-  const res = await correntApi.getDataByData(data, type);
+const getDataByData = async (date, type) => {
+  const res = await correntApi.getDataByData(date, type);
 
   return mapItem(res);
 };
@@ -30,9 +28,7 @@ const getAllData = async () => {
 };
 
 const createItem = async (newItem) => {
-  const res = await correntApi.createItem(newItem);
-
-  return mapItem(res);
+  await correntApi.createItem(newItem);
 };
 
 const api = {

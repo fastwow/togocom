@@ -64,6 +64,14 @@ const AddNewItemDialog = ({ open, handleClose, handleAddItem }) => {
           fullWidth
           sx={{ marginBottom: 2, marginTop: 2 }}
         />
+        <TextField
+          label="Short Code"
+          name="shortCode"
+          value={newItem.shortCode}
+          onChange={handleInputChange}
+          fullWidth
+          sx={{ marginBottom: 2, marginTop: 2 }}
+        />
         <Select
           label="Type"
           name="type"
