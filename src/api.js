@@ -31,10 +31,15 @@ const createItem = async (newItem) => {
   await correntApi.createItem(newItem);
 };
 
+const deleteItem = async (id) => {
+  await correntApi.deleteItem(id);
+};
+
 const api = {
   getDataByData,
   createItem,
   getAllData,
+  deleteItem,
 };
 
 export default api;

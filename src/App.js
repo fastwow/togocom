@@ -7,8 +7,6 @@ import { Box } from "@mui/material";
 const App = () => {
   const date = new Date().toLocaleDateString();
 
-  console.log(date);
-
   return (
     <Box
       sx={{

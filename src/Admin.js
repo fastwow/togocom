@@ -10,13 +10,20 @@ import {
   Container,
   Box,
   Button,
+  IconButton,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from "@mui/material";
+import { Delete as DeleteIcon } from "@mui/icons-material";
 import AddNewItemDialog from "./AddNewItemDialog";
 import api from "./api";
 
 const Admin = () => {
   const [data, setData] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
+  const [deleteItemId, setDeleteItemId] = useState(null);
 
   useEffect(() => {
     fetchData();
@@ -37,6 +44,12 @@ const Admin = () => {
     fetchData();
   };
 
+  const handleDeleteItem = async (itemId) => {
+    await api.deleteItem(itemId);
+    setDeleteItemId(null);
+    fetchData();
+  };
+
   return (
     <Box
       sx={{
@@ -48,7 +61,7 @@ const Admin = () => {
         display: "flex",
       }}
     >
-      <Container fixed sx={{}}>
+      <Container fixed>
         <Box
           sx={{
             fontSize: 36,
@@ -63,17 +76,15 @@ const Admin = () => {
         >
           Admin
         </Box>
-        <TableContainer
-          component={Paper}
-          sx={{ marginTop: 4, marginBottom: 4 }}
-        >
+        <TableContainer component={Paper} sx={{ marginTop: 4, marginBottom: 4 }}>
           <Table>
             <TableHead>
               <TableRow>
                 <TableCell>Date</TableCell>
                 <TableCell>Type</TableCell>
-                <TableCell>Prize</TableCell>
+                <TableCell>Prizes</TableCell>
                 <TableCell>Winners</TableCell>
+                <TableCell>Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -97,6 +108,14 @@ const Admin = () => {
                       </span>
                     ))}
                   </TableCell>
+                  <TableCell>
+                    <IconButton
+                      onClick={() => setDeleteItemId(row.id)}
+                      color="error"
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -105,7 +124,7 @@ const Admin = () => {
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <Button
             variant="contained"
-            color="error"
+            color="primary"
             onClick={() => setOpenDialog(true)}
           >
             Add New Item
@@ -116,6 +135,23 @@ const Admin = () => {
           handleClose={() => setOpenDialog(false)}
           handleAddItem={handleAddItem}
         />
+        <Dialog open={deleteItemId !== null} onClose={() => setDeleteItemId(null)}>
+          <DialogTitle>Confirm Delete</DialogTitle>
+          <DialogContent>
+            Are you sure you want to delete this item?
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setDeleteItemId(null)}>Cancel</Button>
+            <Button
+              onClick={() => {
+                handleDeleteItem(deleteItemId);
+              }}
+              color="error"
+            >
+              Delete
+            </Button>
+          </DialogActions>
+        </Dialog>
       </Container>
     </Box>
   );

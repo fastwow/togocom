@@ -1,6 +1,13 @@
 import { DATA } from "./mocks";
 import { db } from "./firebase";
-import { collection, addDoc, query, getDocs } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  query,
+  getDocs,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 import { Timestamp } from "firebase/firestore";
 
 const getDataByData = async (date, type) => {
@@ -9,7 +16,9 @@ const getDataByData = async (date, type) => {
 
   const q = query(collection(db, "Lotteries"));
   const querySnapshot = await getDocs(q);
-  const data = querySnapshot.docs.map((doc) => doc.data());
+  const data = querySnapshot.docs.map((doc) => {
+    return { ...doc.data(), id: doc.id };
+  });
   console.log("data", data);
 
   // convert data.date from timestamp to string in format DD-MM-YYYY
@@ -23,7 +32,9 @@ const getDataByData = async (date, type) => {
 const getAllData = async () => {
   const q = query(collection(db, "Lotteries"));
   const querySnapshot = await getDocs(q);
-  const data = querySnapshot.docs.map((doc) => doc.data());
+  const data = querySnapshot.docs.map((doc) => {
+    return { ...doc.data(), id: doc.id };
+  });
   console.log("data", data);
 
   // convert data.date from timestamp to string in format MM-DD-YYYY
@@ -55,10 +66,17 @@ const createItem = async (newItem) => {
   return await addDoc(collection(db, "Lotteries"), newItem);
 };
 
+const deleteItem = async (id) => {
+  console.log("id", id);
+
+  await deleteDoc(doc(db, "Lotteries", id));
+};
+
 const api = {
   getDataByData,
   createItem,
   getAllData,
+  deleteItem,
 };
 
 export default api;
