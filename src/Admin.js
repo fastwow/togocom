@@ -30,6 +30,7 @@ const Admin = () => {
   const handleAddItem = async (newItem) => {
     await api.createItem({
       ...newItem,
+      type: newItem.type.toUpperCase(),
       prizes: newItem.prizes.map((p) => ({ title: p })),
     });
     setOpenDialog(false);
@@ -102,7 +103,11 @@ const Admin = () => {
           </Table>
         </TableContainer>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Button variant="contained" onClick={() => setOpenDialog(true)}>
+          <Button
+            variant="contained"
+            color="error"
+            onClick={() => setOpenDialog(true)}
+          >
             Add New Item
           </Button>
         </Box>

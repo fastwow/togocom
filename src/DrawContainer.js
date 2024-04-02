@@ -23,7 +23,10 @@ const DrawContainer = ({ originalType, date }) => {
           : undefined
       );
       console.log(response);
-      setData(response);
+      setData({
+        ...response,
+        currentPrize: response.prizes[0],
+      });
     };
     fetchData();
   }, [date, type]);

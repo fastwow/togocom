@@ -114,6 +114,7 @@ const AddNewItemDialog = ({ open, handleClose, handleAddItem }) => {
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
         <Button
+          color="error"
           // disable if date is empty
           disabled={
             !newItem.date || !newItem.winners.length || !newItem.prizes.length

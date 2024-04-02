@@ -20,8 +20,4 @@ export const DATA = [
     winners: ["433246"],
     shortCode: "123",
   },
-].map((d) => ({
-  ...d,
-  notes: `
-  Félicitations! Tu as gagné une voiture ${d.prizes[0].title} au jeu "Fan Foot"! Tu seras contacter uniquement par le 888 pour recupérer ton lot`,
-}));
+];
