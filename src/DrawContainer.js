@@ -3,7 +3,7 @@ import Draw from "./Draw";
 import Box from "@mui/material/Box";
 import api from "./api";
 
-const DrawContainer = ({ originalType, date }) => {
+const DrawContainer = ({ originalType, date, todayDate }) => {
   const [type, setType] = React.useState(originalType);
   const onChangeType = React.useCallback((t) => {
     setType(t);
@@ -31,51 +31,21 @@ const DrawContainer = ({ originalType, date }) => {
 
       setIsLoading(false);
 
-      if (!response) return;
-
-      setData({
-        ...response,
-        currentPrize: response.prizes[0],
-      });
+      setData(
+        !response
+          ? undefined
+          : {
+              ...response,
+              currentPrize: response.prizes[0],
+            }
+      );
     };
     fetchData();
   }, [date, type]);
 
   console.log("data", data);
 
-  if (!data) {
-    if (isLoading) {
-      return (
-        <Box
-          // full screen and center
-          sx={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Box
-            sx={{
-              fontSize: 48,
-              fontWeight: "bold",
-              color: "black",
-              textAlign: "center",
-              lineHeight: "64px",
-              paddingLeft: 4,
-              paddingRight: 4,
-            }}
-          >
-            Chargement...
-          </Box>
-        </Box>
-      );
-    }
-
+  if (isLoading) {
     return (
       <Box
         // full screen and center
@@ -101,13 +71,20 @@ const DrawContainer = ({ originalType, date }) => {
             paddingRight: 4,
           }}
         >
-          Pas de données pour {type} le {date}
+          Chargement...
         </Box>
       </Box>
     );
   }
 
-  return <Draw lotteryData={data} type={type} onChangeType={onChangeType} />;
+  return (
+    <Draw
+      lotteryData={data}
+      type={type}
+      todayDate={todayDate}
+      onChangeType={onChangeType}
+    />
+  );
 };
 
 export default DrawContainer;

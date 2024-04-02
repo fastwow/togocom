@@ -5,7 +5,7 @@ import Start from "./Start";
 import Box from "@mui/material/Box";
 import Finished from "./Finished";
 
-const Draw = ({ lotteryData, type, onChangeType }) => {
+const Draw = ({ lotteryData, todayDate, type, onChangeType }) => {
   const [state, setState] = React.useState("drawAnnouncement");
 
   const onStart = React.useCallback(() => {
@@ -32,17 +32,16 @@ const Draw = ({ lotteryData, type, onChangeType }) => {
         display: "flex",
       }}
     >
-      {state === "drawAnnouncement" && (
+      {state === "drawAnnouncement" ? (
         <Start
-          prizes={lotteryData.prizes}
+          prizes={lotteryData?.prizes}
           onStart={onStart}
-          date={lotteryData.date}
-          shortCode={lotteryData.shortCode}
+          date={lotteryData?.date || todayDate}
+          shortCode={lotteryData?.shortCode}
           type={type}
           onChangeType={onChangeType}
         />
-      )}
-      {state === "drawStart" && (
+      ) : state === "drawStart" ? (
         <Show
           onDrawCompleted={onDrawCompleted}
           date={lotteryData.date}
@@ -50,8 +49,7 @@ const Draw = ({ lotteryData, type, onChangeType }) => {
           values={lotteryData.winners}
           prize={lotteryData.currentPrize}
         />
-      )}
-      {state === "drawCompleted" && (
+      ) : state === "drawCompleted" ? (
         <Results
           onDrawResultsCompleted={onDrawResultsCompleted}
           date={lotteryData.date}
@@ -59,14 +57,15 @@ const Draw = ({ lotteryData, type, onChangeType }) => {
           values={lotteryData.winners}
           notes={lotteryData.notes}
         />
-      )}
-      {state === "drawFinished" && (
-        <Finished
-          date={lotteryData.date}
-          shortCode={lotteryData.shortCode}
-          values={lotteryData.winners}
-          prize={lotteryData.currentPrize}
-        />
+      ) : (
+        state === "drawFinished" && (
+          <Finished
+            date={lotteryData.date}
+            shortCode={lotteryData.shortCode}
+            values={lotteryData.winners}
+            prize={lotteryData.currentPrize}
+          />
+        )
       )}
     </Box>
   );

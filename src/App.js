@@ -25,20 +25,44 @@ const App = () => {
         <Routes>
           <Route
             path="/weekly"
-            element={<DrawContainer date={date} originalType="weekly" />}
+            element={
+              <DrawContainer
+                date={date}
+                originalType="weekly"
+                todayDate={date}
+              />
+            }
           />
           <Route
             path="/super"
-            element={<DrawContainer date={date} originalType="super" />}
+            element={
+              <DrawContainer
+                date={date}
+                originalType="super"
+                todayDate={date}
+              />
+            }
           />
           <Route path="/admin" element={<Admin />} />
           <Route
             path="/"
-            element={<DrawContainer date={date} originalType="daily" />}
+            element={
+              <DrawContainer
+                date={date}
+                originalType="daily"
+                todayDate={date}
+              />
+            }
           />
           <Route
             path="*"
-            element={<DrawContainer date={date} originalType="daily" />}
+            element={
+              <DrawContainer
+                date={date}
+                originalType="daily"
+                todayDate={date}
+              />
+            }
           />
         </Routes>
       </Router>

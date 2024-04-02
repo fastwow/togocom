@@ -7,16 +7,31 @@ import {
   getDocs,
   doc,
   deleteDoc,
+  limit,
+  orderBy,
+  where,
 } from "firebase/firestore";
 import { Timestamp } from "firebase/firestore";
 import { formatDate } from "./format";
 
 const getDataByData = async (date, type) => {
-  const q = query(collection(db, "Lotteries"));
+  const date1 = date.split("/");
+
+  const timestamp = new Date(date1[2], date1[1] - 1, date1[0]);
+
+  // fetch the the latest item from databae prior to the date
+  const q = query(
+    collection(db, "Lotteries"),
+    where("date", "<=", timestamp),
+    where("type", "==", type),
+    orderBy("date", "desc"),
+    limit(1)
+  );
   const querySnapshot = await getDocs(q);
   const data = querySnapshot.docs.map((doc) => {
     return { ...doc.data(), id: doc.id };
   });
+  console.log("data", data);
 
   // convert data.date from timestamp to string in format DD-MM-YYYY
   data.forEach((item) => {
@@ -27,7 +42,7 @@ const getDataByData = async (date, type) => {
   console.log("date", date);
   console.log("type", type);
 
-  return data.find((item) => item.date === date && item.type === type);
+  return data.find((item) => item.type === type);
 };
 
 const getAllData = async () => {

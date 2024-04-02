@@ -6,7 +6,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-const ShortCode = () => {
+const ShortCode = ({ code }) => {
   return (
     <Box
       sx={{
@@ -30,7 +30,7 @@ const ShortCode = () => {
           paddingRight: 6,
         }}
       >
-        909
+        {code}
       </Box>
     </Box>
   );
@@ -59,7 +59,14 @@ const Logo = () => {
   );
 };
 
-const PrizeInfo = ({ onStart, prizes, isPending, type, onChangeType }) => {
+const PrizeInfo = ({
+  onStart,
+  prizes,
+  date,
+  isPending,
+  type,
+  onChangeType,
+}) => {
   const onChangeSelectType = React.useCallback(
     (event) => {
       onChangeType(event.target.value);
@@ -81,98 +88,130 @@ const PrizeInfo = ({ onStart, prizes, isPending, type, onChangeType }) => {
         flexDirection: "column",
       }}
     >
-      <Box
-        sx={{
-          fontSize: 36,
-          fontWeight: "bold",
-          color: "black",
-          textAlign: "center",
-          lineHeight: "64px",
-          paddingLeft: 4,
-          paddingRight: 4,
-        }}
-      >
-        Bienvenue au Jeu Fan Foot!
-      </Box>
-      <Box
-        sx={{
-          fontSize: 48,
-          fontWeight: "bold",
-          color: "black",
-          textAlign: "center",
-          lineHeight: "64px",
-          paddingLeft: 4,
-          paddingRight: 4,
-        }}
-      >
-        Jeu Fan Foot!
-      </Box>
-      <Box
-        sx={{
-          fontSize: 24,
-          fontWeight: "bold",
-          color: "black",
-          textAlign: "center",
-          lineHeight: "64px",
-          paddingLeft: 4,
-          paddingRight: 4,
-        }}
-      >
-        Lots:
-      </Box>
-      {prizes.map((prize, index) => (
+      {prizes && prizes.length ? (
+        <>
+          <Box
+            sx={{
+              fontSize: 36,
+              fontWeight: "bold",
+              color: "black",
+              textAlign: "center",
+              lineHeight: "64px",
+              paddingLeft: 4,
+              paddingRight: 4,
+            }}
+          >
+            Bienvenue au Jeu Fan Foot!
+          </Box>
+          <Box
+            sx={{
+              fontSize: 48,
+              fontWeight: "bold",
+              color: "black",
+              textAlign: "center",
+              lineHeight: "64px",
+              paddingLeft: 4,
+              paddingRight: 4,
+            }}
+          >
+            Jeu Fan Foot!
+          </Box>
+          <Box
+            sx={{
+              fontSize: 24,
+              fontWeight: "bold",
+              color: "black",
+              textAlign: "center",
+              lineHeight: "64px",
+              paddingLeft: 4,
+              paddingRight: 4,
+            }}
+          >
+            Lots:
+          </Box>
+          {prizes.map((prize, index) => (
+            <Box
+              sx={{
+                fontSize: 24,
+                fontWeight: "bold",
+                color: "black",
+                textAlign: "center",
+                lineHeight: "64px",
+                paddingLeft: 4,
+                paddingRight: 4,
+              }}
+            >
+              {prize.title}
+            </Box>
+          ))}
+          <Box
+            sx={{
+              // align content to center
+              display: "flex",
+              justifyContent: "center",
+              marginTop: 4,
+            }}
+          >
+            <Button
+              variant="outlined"
+              onClick={onStart}
+              sx={{
+                color: isPending ? "white" : "black",
+                paddingTop: 1,
+                paddingBottom: 1,
+                paddingLeft: 8,
+                paddingRight: 8,
+                backgroundColor: isPending ? "red" : "white",
+                borderColor: "red",
+                disabled: isPending,
+                borderWidth: 3,
+                borderRadius: 3,
+                fontSize: 24,
+                // bold
+                fontWeight: "bold",
+                "&:hover": {
+                  backgroundColor: "red",
+                  color: "white",
+                  borderColor: "red",
+                  borderWidth: 3,
+                  borderRadius: 3,
+                  boxShadow: "none",
+                },
+              }}
+            >
+              Commencer
+            </Button>
+          </Box>
+        </>
+      ) : (
         <Box
+          // full screen and center
           sx={{
-            fontSize: 24,
-            fontWeight: "bold",
-            color: "black",
-            textAlign: "center",
-            lineHeight: "64px",
-            paddingLeft: 4,
-            paddingRight: 4,
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          {prize.title}
+          <Box
+            sx={{
+              fontSize: 48,
+              fontWeight: "bold",
+              color: "black",
+              textAlign: "center",
+              lineHeight: "64px",
+              paddingLeft: 4,
+              paddingRight: 4,
+            }}
+          >
+            Pas de données pour {type} le {date}
+          </Box>
         </Box>
-      ))}
-      <Box
-        sx={{
-          // align content to center
-          display: "flex",
-          justifyContent: "center",
-          marginTop: 4,
-        }}
-      >
-        <Button
-          variant="outlined"
-          onClick={onStart}
-          sx={{
-            color: isPending ? "white" : "black",
-            paddingTop: 1,
-            paddingBottom: 1,
-            paddingLeft: 8,
-            paddingRight: 8,
-            backgroundColor: isPending ? "red" : "white",
-            borderColor: "red",
-            disabled: isPending,
-            borderWidth: 3,
-            borderRadius: 3,
-            fontSize: 24,
-            // bold
-            fontWeight: "bold",
-            "&:hover": {
-              backgroundColor: "red",
-              color: "white",
-              borderColor: "red",
-              borderWidth: 3,
-              borderRadius: 3,
-              boxShadow: "none",
-            },
-          }}
-        >
-          Commencer
-        </Button>
-      </Box>
+      )}
       {isPending ? (
         <Box
           sx={{
@@ -392,7 +431,7 @@ const PrizeInfo = ({ onStart, prizes, isPending, type, onChangeType }) => {
   );
 };
 
-const Start = ({ onStart, prizes, type, onChangeType }) => {
+const Start = ({ onStart, prizes, shortCode, type, date, onChangeType }) => {
   const [isPending, setIsPending] = React.useState(false);
   React.useEffect(() => {
     if (isPending) {
@@ -432,7 +471,7 @@ const Start = ({ onStart, prizes, type, onChangeType }) => {
           alignItems: "center",
         }}
       >
-        <ShortCode />
+        <Box>{shortCode ? <ShortCode code={shortCode} /> : undefined}</Box>
         <Logo />
       </Box>
       <Box
@@ -453,6 +492,7 @@ const Start = ({ onStart, prizes, type, onChangeType }) => {
           isPending={isPending}
           type={type}
           onChangeType={onChangeType}
+          date={date}
         />
       </Box>
     </Box>
