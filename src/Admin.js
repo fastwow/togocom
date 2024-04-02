@@ -15,6 +15,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  Tab,
 } from "@mui/material";
 import { Delete as DeleteIcon } from "@mui/icons-material";
 import AddNewItemDialog from "./AddNewItemDialog";
@@ -76,7 +77,10 @@ const Admin = () => {
         >
           Admin
         </Box>
-        <TableContainer component={Paper} sx={{ marginTop: 4, marginBottom: 4 }}>
+        <TableContainer
+          component={Paper}
+          sx={{ marginTop: 4, marginBottom: 4 }}
+        >
           <Table>
             <TableHead>
               <TableRow>
@@ -84,6 +88,7 @@ const Admin = () => {
                 <TableCell>Type</TableCell>
                 <TableCell>Prizes</TableCell>
                 <TableCell>Winners</TableCell>
+                <TableCell>Short Code</TableCell>
                 <TableCell>Action</TableCell>
               </TableRow>
             </TableHead>
@@ -108,6 +113,7 @@ const Admin = () => {
                       </span>
                     ))}
                   </TableCell>
+                  <TableCell>{row.shortCode}</TableCell>
                   <TableCell>
                     <IconButton
                       onClick={() => setDeleteItemId(row.id)}
@@ -124,7 +130,7 @@ const Admin = () => {
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <Button
             variant="contained"
-            color="primary"
+            color="error"
             onClick={() => setOpenDialog(true)}
           >
             Add New Item
@@ -135,7 +141,10 @@ const Admin = () => {
           handleClose={() => setOpenDialog(false)}
           handleAddItem={handleAddItem}
         />
-        <Dialog open={deleteItemId !== null} onClose={() => setDeleteItemId(null)}>
+        <Dialog
+          open={deleteItemId !== null}
+          onClose={() => setDeleteItemId(null)}
+        >
           <DialogTitle>Confirm Delete</DialogTitle>
           <DialogContent>
             Are you sure you want to delete this item?

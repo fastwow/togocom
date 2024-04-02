@@ -57,7 +57,7 @@ const AddNewItemDialog = ({ open, handleClose, handleAddItem }) => {
       <DialogTitle>Add New Item</DialogTitle>
       <DialogContent>
         <TextField
-          label="Date in DD-MM-YYYY format"
+          label="eg. 31/12/2024"
           name="date"
           value={newItem.date}
           onChange={handleInputChange}
@@ -123,7 +123,6 @@ const AddNewItemDialog = ({ open, handleClose, handleAddItem }) => {
         <Button onClick={handleClose}>Cancel</Button>
         <Button
           color="error"
-          // disable if date is empty
           disabled={
             !newItem.date || !newItem.winners.length || !newItem.prizes.length
           }

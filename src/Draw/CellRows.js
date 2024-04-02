@@ -92,6 +92,10 @@ export const Cell = ({ value, onAnimateFinished }) => {
 
     const interval = setInterval(() => {
       setCurrentValue((currentValue) => {
+        if (flag.current) {
+          return currentValue;
+        }
+
         // stop the interval when the loop is 3
         if (loop === 2 && currentValue === value && !flag.current) {
           clearInterval(interval);
