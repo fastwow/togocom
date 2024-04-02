@@ -1,43 +1,27 @@
-export const PRIZES = [
-  { title: "SUV BAIC X35!", isGrandPrize: true },
-  { title: "Samsung A24+6Go de data", isGrandPrize: false },
-  { title: "Airtime 5000 FCFA chacun", isGrandPrize: false },
-];
-
-export const DAILY_PRIZES = {
-  "29/03/2024": {
-    shortCode: "909",
+export const DATA = [
+  {
+    type: "DAILY",
     date: "29/03/2024",
+    prizes: [{ title: "Airtime 5000 FCFA chacun" }],
     winners: ["123456", "654321", "765432", "987654"],
-    prizes: PRIZES,
-    currentPrize: PRIZES[2],
-    notes: `
-    Félicitations! Tu as gagné Airtime d'une valeur de 5000 FCFA du jeu
-            "Fan Foot"! Tu recevras automatiquement une dotation de crédit de 5
-            000 FCFA`,
+    shortCode: "123",
   },
-};
-
-export const WEEKLY_PRIZES = {
-  "29/03/2024": {
-    shortCode: "333",
+  {
+    type: "WEEKLY",
     date: "29/03/2024",
+    prizes: [{ title: "Samsung A24+6Go de data" }],
     winners: ["123647"],
-    prizes: PRIZES,
-    currentPrize: PRIZES[1],
-    notes: `
-      Félicitations! Tu as gagné Samsung A24+6Go de data au jeu "Fan Foot"! Tu seras contacter uniquement par le 888 pour recupérer ton lot`,
+    shortCode: "123",
   },
-};
-
-export const SUPER_PRIZES = {
-  "29/03/2024": {
-    shortCode: "888",
+  {
+    type: "SUPER",
     date: "29/03/2024",
+    prizes: [{ title: "SUV BAIC X35!" }],
     winners: ["433246"],
-    prizes: PRIZES,
-    currentPrize: PRIZES[0],
-    notes: `
-    Félicitations! Tu as gagné une voiture SUV BAIC X35 au jeu "Fan Foot"! Tu seras contacter uniquement par le 888 pour recupérer ton lot`,
+    shortCode: "123",
   },
-};
+].map((d) => ({
+  ...d,
+  notes: `
+  Félicitations! Tu as gagné une voiture ${d.prizes[0].title} au jeu "Fan Foot"! Tu seras contacter uniquement par le 888 pour recupérer ton lot`,
+}));

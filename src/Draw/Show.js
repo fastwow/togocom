@@ -137,7 +137,6 @@ const Show = ({ onDrawCompleted, values, date, prize, shortCode }) => {
         right: 0,
         bottom: 0,
         display: "flex",
-        backgroundImage: "url(/main_background.jpg)",
       }}
     >
       <Box

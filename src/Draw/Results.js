@@ -204,7 +204,6 @@ const Results = ({
         right: 0,
         bottom: 0,
         display: "flex",
-        backgroundImage: "url(/main_background.jpg)",
       }}
     >
       <Box
