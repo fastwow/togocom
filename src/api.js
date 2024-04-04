@@ -11,7 +11,7 @@ const mapItem = (itm) => {
   return {
     ...itm,
     notes: `
-  Félicitations! Tu as gagné une voiture ${itm.prizes[0].title} au jeu "Fan Foot"! Tu seras contacter uniquement par le 888 pour recupérer ton lot`,
+    Félicitations! Tu as gagné ${itm.prizes[0].title} du jeu " Fan Foot"!`,
   };
 };
 

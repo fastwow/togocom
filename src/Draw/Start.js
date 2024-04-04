@@ -208,7 +208,7 @@ const PrizeInfo = ({
               paddingRight: 4,
             }}
           >
-            Pas de données pour {type} le {date}
+            Pas de données
           </Box>
         </Box>
       )}
