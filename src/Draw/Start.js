@@ -420,9 +420,9 @@ const PrizeInfo = ({
               }}
               onChange={onChangeSelectType}
             >
-              <MenuItem value={"daily"}>DAILY</MenuItem>
-              <MenuItem value={"weekly"}>WEEKLY</MenuItem>
-              <MenuItem value={"super"}>SUPER</MenuItem>
+              <MenuItem value={"daily"}>Quotidien</MenuItem>
+              <MenuItem value={"weekly"}>Hebdomadaire</MenuItem>
+              <MenuItem value={"super"}>Grand</MenuItem>
             </Select>
           </FormControl>
         </Box>

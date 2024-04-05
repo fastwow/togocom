@@ -46,7 +46,11 @@ const getDataByData = async (date, type) => {
 };
 
 const getAllData = async () => {
-  const q = query(collection(db, "Lotteries"));
+  const q = query(
+    collection(db, "Lotteries"),
+    orderBy("date", "asc"),
+    limit(100)
+  );
   const querySnapshot = await getDocs(q);
   const data = querySnapshot.docs.map((doc) => {
     return { ...doc.data(), id: doc.id };

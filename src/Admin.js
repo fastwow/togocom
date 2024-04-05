@@ -42,7 +42,10 @@ const Admin = () => {
       prizes: newItem.prizes.map((p) => ({ title: p })),
     });
     setOpenDialog(false);
-    fetchData();
+    await fetchData();
+
+    const tableContainer = document.getElementById("table-container");
+    tableContainer.scrollTop = tableContainer.scrollHeight;
   };
 
   const handleDeleteItem = async (itemId) => {
@@ -79,7 +82,7 @@ const Admin = () => {
         </Box>
         <TableContainer
           component={Paper}
-          sx={{ marginTop: 4, marginBottom: 4 }}
+          sx={{ maxHeight: "calc(100vh - 200px)", overflow: "auto" }}
         >
           <Table>
             <TableHead>
@@ -127,7 +130,7 @@ const Admin = () => {
             </TableBody>
           </Table>
         </TableContainer>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Box sx={{ display: "flex", marginTop: 4, justifyContent: "center" }}>
           <Button
             variant="contained"
             color="error"
