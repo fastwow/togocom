@@ -15,10 +15,13 @@ const mapItem = (itm) => {
   };
 };
 
-const getDataByData = async (date, type) => {
-  const res = await correntApi.getDataByData(date, type);
+const getDataByData = async (date, type, limit) => {
+  const res = await correntApi.getDataByData(date, type, limit);
 
-  return mapItem(res);
+  if (limit === 1) {
+    return mapItem(res);
+  }
+  return res.map(mapItem);
 };
 
 const getAllData = async () => {

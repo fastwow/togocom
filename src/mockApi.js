@@ -1,9 +1,9 @@
 import { DATA } from "./mocks";
 
-const getDataByData = async (data, type) => {
+const getDataByData = async (data, type, limit) => {
   console.log("getDataByData", data, type);
 
-  return DATA.find((d) => d.date === data && d.type === type);
+  return DATA.find((d) => d.date === data && d.type === type, limit);
 };
 
 const getAllData = async () => {

@@ -5,7 +5,7 @@ import Start from "./Start";
 import Box from "@mui/material/Box";
 import Finished from "./Finished";
 
-const Draw = ({ lotteryData, todayDate, type, onChangeType }) => {
+const Draw = ({ lotteryData, type, onChangeType, onChangeDate }) => {
   const [state, setState] = React.useState("drawAnnouncement");
 
   const onStart = React.useCallback(() => {
@@ -36,10 +36,12 @@ const Draw = ({ lotteryData, todayDate, type, onChangeType }) => {
         <Start
           prizes={lotteryData?.prizes}
           onStart={onStart}
-          date={lotteryData?.date || todayDate}
+          date={lotteryData?.date}
           shortCode={lotteryData?.shortCode}
           type={type}
+          dates={lotteryData?.dates}
           onChangeType={onChangeType}
+          onChangeDate={onChangeDate}
         />
       ) : state === "drawStart" ? (
         <Show

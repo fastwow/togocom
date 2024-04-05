@@ -2,14 +2,24 @@ import * as React from "react";
 import Draw from "./Draw";
 import Box from "@mui/material/Box";
 import api from "./api";
+import { formatDate } from "./format";
 
-const DrawContainer = ({ originalType, date, todayDate }) => {
+const todayDate = formatDate(new Date());
+
+const DrawContainer = ({ originalType }) => {
+  const [date, setDate] = React.useState(formatDate(new Date()));
   const [type, setType] = React.useState(originalType);
   const onChangeType = React.useCallback((t) => {
     setType(t);
   }, []);
 
   const [data, setData] = React.useState(undefined);
+  const [allData, setAllData] = React.useState(undefined);
+
+  const onChangeDate = React.useCallback((d) => {
+    console.log("onChangeDate", d);
+    setDate(d);
+  }, []);
 
   const [isLoading, setIsLoading] = React.useState(true);
 
@@ -17,33 +27,43 @@ const DrawContainer = ({ originalType, date, todayDate }) => {
     const fetchData = async () => {
       setIsLoading(true);
 
-      const response = await api.getDataByData(
-        date,
+      const allPossibleDates = await api.getDataByData(
+        todayDate,
         type === "daily"
           ? "DAILY"
           : type === "weekly"
           ? "WEEKLY"
           : type === "super"
           ? "SUPER"
-          : undefined
+          : undefined,
+        100
       );
-      console.log(response);
-
+      setAllData(allPossibleDates);
       setIsLoading(false);
-
-      setData(
-        !response
-          ? undefined
-          : {
-              ...response,
-              currentPrize: response.prizes[0],
-            }
-      );
     };
     fetchData();
-  }, [date, type]);
+  }, [type]);
 
-  console.log("data", data);
+  React.useEffect(() => {
+    if (!allData?.length) {
+      setData(undefined);
+      return;
+    }
+
+    const response = allData.find((item) => item.date === date) || allData[0];
+
+    console.log("response", response);
+
+    setData(
+      !response
+        ? undefined
+        : {
+            ...response,
+            currentPrize: response.prizes[0],
+            dates: allData?.map((item) => item.date),
+          }
+    );
+  }, [allData, type, date]);
 
   if (isLoading) {
     return (
@@ -81,8 +101,8 @@ const DrawContainer = ({ originalType, date, todayDate }) => {
     <Draw
       lotteryData={data}
       type={type}
-      todayDate={todayDate}
       onChangeType={onChangeType}
+      onChangeDate={onChangeDate}
     />
   );
 };

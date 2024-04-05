@@ -3,11 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Admin from "./Admin";
 import DrawContainer from "./DrawContainer";
 import { Box } from "@mui/material";
-import { formatDate } from "./format";
 
 const App = () => {
-  const date = formatDate(new Date());
-
   return (
     <Box
       sx={{
@@ -25,45 +22,15 @@ const App = () => {
         <Routes>
           <Route
             path="/weekly"
-            element={
-              <DrawContainer
-                date={date}
-                originalType="weekly"
-                todayDate={date}
-              />
-            }
+            element={<DrawContainer originalType="weekly" />}
           />
           <Route
             path="/super"
-            element={
-              <DrawContainer
-                date={date}
-                originalType="super"
-                todayDate={date}
-              />
-            }
+            element={<DrawContainer originalType="super" />}
           />
           <Route path="/admin" element={<Admin />} />
-          <Route
-            path="/"
-            element={
-              <DrawContainer
-                date={date}
-                originalType="daily"
-                todayDate={date}
-              />
-            }
-          />
-          <Route
-            path="*"
-            element={
-              <DrawContainer
-                date={date}
-                originalType="daily"
-                todayDate={date}
-              />
-            }
-          />
+          <Route path="/" element={<DrawContainer originalType="daily" />} />
+          <Route path="*" element={<DrawContainer originalType="daily" />} />
         </Routes>
       </Router>
     </Box>

@@ -63,15 +63,24 @@ const PrizeInfo = ({
   onStart,
   prizes,
   date,
+  dates,
   isPending,
   type,
   onChangeType,
+  onChangeDate,
 }) => {
   const onChangeSelectType = React.useCallback(
     (event) => {
       onChangeType(event.target.value);
     },
     [onChangeType]
+  );
+
+  const onChangeSelectDate = React.useCallback(
+    (event) => {
+      onChangeDate(event.target.value);
+    },
+    [onChangeDate]
   );
 
   return (
@@ -426,12 +435,62 @@ const PrizeInfo = ({
             </Select>
           </FormControl>
         </Box>
+        {dates ? (
+          <Box sx={{ width: 160, marginLeft: 20 }}>
+            <FormControl fullWidth>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={date}
+                color="error"
+                // change text color to red
+                sx={{
+                  color: "white",
+                  backgroundColor: "red",
+                  // add border color to red
+                  borderColor: "red",
+                  // add border width to 2
+                  borderWidth: 2,
+                  // add border style to solid
+                  borderStyle: "solid",
+                  // add box shadow
+                  boxShadow: 4,
+                  textTransform: "uppercase",
+                  // change font size to 24
+                  // bold text
+                  fontWeight: "bold",
+                  borderRadius: 3,
+                  // hover effect
+                  "&:hover": {
+                    backgroundColor: "red",
+                    color: "white",
+                    borderColor: "red",
+                  },
+                }}
+                onChange={onChangeSelectDate}
+              >
+                {dates.map((date) => (
+                  <MenuItem value={date}>{date}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+        ) : undefined}
       </Box>
     </Box>
   );
 };
 
-const Start = ({ onStart, prizes, shortCode, type, date, onChangeType }) => {
+const Start = ({
+  onStart,
+  prizes,
+  shortCode,
+  dates,
+  type,
+  date,
+  onChangeType,
+  onChangeDate,
+}) => {
   const [isPending, setIsPending] = React.useState(false);
   React.useEffect(() => {
     if (isPending) {
@@ -492,7 +551,9 @@ const Start = ({ onStart, prizes, shortCode, type, date, onChangeType }) => {
           isPending={isPending}
           type={type}
           onChangeType={onChangeType}
+          onChangeDate={onChangeDate}
           date={date}
+          dates={dates}
         />
       </Box>
     </Box>

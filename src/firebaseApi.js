@@ -14,8 +14,10 @@ import {
 import { Timestamp } from "firebase/firestore";
 import { formatDate } from "./format";
 
-const getDataByData = async (date, type) => {
+const getDataByData = async (date, type, limitNumber) => {
   const date1 = date.split("/");
+
+  console.log("! FIREBASE getDataByData.date !", date);
 
   const timestamp = new Date(date1[2], date1[1] - 1, date1[0]);
 
@@ -25,24 +27,23 @@ const getDataByData = async (date, type) => {
     where("date", "<=", timestamp),
     where("type", "==", type),
     orderBy("date", "desc"),
-    limit(1)
+    limit(limitNumber)
   );
   const querySnapshot = await getDocs(q);
   const data = querySnapshot.docs.map((doc) => {
     return { ...doc.data(), id: doc.id };
   });
-  console.log("data", data);
 
   // convert data.date from timestamp to string in format DD-MM-YYYY
   data.forEach((item) => {
     item.date = formatDate(item.date.toDate());
   });
 
-  console.log(data);
-  console.log("date", date);
-  console.log("type", type);
-
-  return data.find((item) => item.type === type);
+  if (limitNumber === 1) {
+    return data.find((item) => item.type === type);
+  } else {
+    return data.filter((item) => item.type === type);
+  }
 };
 
 const getAllData = async () => {
@@ -55,7 +56,6 @@ const getAllData = async () => {
   const data = querySnapshot.docs.map((doc) => {
     return { ...doc.data(), id: doc.id };
   });
-  console.log("data", data);
 
   // convert data.date from timestamp to string in format MM-DD-YYYY
   data.forEach((item) => {
