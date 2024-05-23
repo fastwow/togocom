@@ -134,7 +134,7 @@ const PrizeInfo = ({ values, date }) => {
           textDecoration: "underline",
         }}
       >
-        Jeu Fan Foot
+        ABLODE
       </Box>
       <Box
         sx={{

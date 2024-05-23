@@ -130,7 +130,7 @@ const PrizeInfo = ({ values, prize, date }) => {
           paddingRight: 4,
         }}
       >
-        Jeu Fan Foot
+        ABLODE
       </Box>
       <Box
         sx={{
@@ -183,7 +183,7 @@ const PrizeInfo = ({ values, prize, date }) => {
           textDecoration: "underline",
         }}
       >
-        Les gagnants du concours Jeu Fan Foot:  
+        Les gagnants du concours ABLODE:  
       </Box>
 
       <Box

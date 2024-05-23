@@ -11,7 +11,7 @@ const mapItem = (itm) => {
   return {
     ...itm,
     notes: `
-    Félicitations! Tu as gagné ${itm.prizes[0].title} du jeu " Fan Foot"!`,
+    Félicitations! Tu as gagné ${itm.prizes[0].title} du jeu ABLODE!`,
   };
 };
 

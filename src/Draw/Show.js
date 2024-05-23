@@ -74,7 +74,7 @@ const PrizeInfo = ({ values, date, prize, onAnimateFinished }) => {
           paddingRight: 4,
         }}
       >
-        Jeu Fan Foot
+        ABLODE
       </Box>
       <Box
         sx={{
