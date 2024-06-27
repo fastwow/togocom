@@ -5,7 +5,7 @@ import { Typography } from "@mui/material";
 export const CellRow = React.memo(({ values, size, onAnimateFinished }) => {
   // convert string values to array of number
   const valuesToRender = React.useMemo(() => {
-    const result = values?.split("").map((value) => parseInt(value));
+    const result = values?.msisdn?.split("").map((value) => parseInt(value));
 
     if (!result?.length) {
       return [];

@@ -72,6 +72,7 @@ const Winner = ({ value }) => {
         borderRadius: 2,
         borderWidth: 2,
         borderStyle: "solid",
+        flexDirection: "row",
         boxShadow: 4,
       }}
     >
@@ -86,8 +87,22 @@ const Winner = ({ value }) => {
           letterSpacing: "0.10em",
         }}
       >
-        {value}
+        {value.msisdn}
       </Typography>
+      {value.points ? (
+        <Typography
+          variant="subtitle1"
+          sx={{
+            fontWeight: "bold",
+            color: "white",
+            paddingRight: 6,
+            // spacing between characters
+            letterSpacing: "0.10em",
+          }}
+        >
+          {value.points} Points
+        </Typography>
+      ) : undefined}
     </Box>
   );
 };

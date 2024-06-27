@@ -111,7 +111,9 @@ const Admin = () => {
                   <TableCell>
                     {row.winners.map((winner, index) => (
                       <span key={index}>
-                        {winner}
+                        {`(msisdn ${winner.msisdn}, ${
+                          winner.points || "0"
+                        } Points)`}
                         <br />
                       </span>
                     ))}
@@ -144,6 +146,7 @@ const Admin = () => {
           handleClose={() => setOpenDialog(false)}
           handleAddItem={handleAddItem}
         />
+
         <Dialog
           open={deleteItemId !== null}
           onClose={() => setDeleteItemId(null)}

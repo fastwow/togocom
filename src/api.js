@@ -12,6 +12,10 @@ const mapItem = (itm) => {
     ...itm,
     notes: `
     Félicitations! Tu as gagné ${itm.prizes[0].title} du jeu ABLODE!`,
+    winners: itm.winners.map((wnr) => ({
+      msisdn: wnr.msisdn || wnr,
+      points: wnr.points,
+    })),
   };
 };
 
