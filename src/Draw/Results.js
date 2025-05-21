@@ -41,9 +41,9 @@ const Logo = () => {
       sx={{
         width: 64,
         height: 64,
-        backgroundColor: "white",
+        // backgroundColor: "white",
         borderRadius: 16,
-        boxShadow: 4,
+        // boxShadow: 4,
         padding: 2,
       }}
     >
@@ -149,7 +149,7 @@ const PrizeInfo = ({ values, date }) => {
           textDecoration: "underline",
         }}
       >
-        ABLODE
+        EduQuiz
       </Box>
       <Box
         sx={{

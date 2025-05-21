@@ -11,7 +11,7 @@ const mapItem = (itm) => {
   return {
     ...itm,
     notes: `
-    Félicitations! Tu as gagné ${itm.prizes[0].title} du jeu ABLODE!`,
+    Félicitations! Tu as gagné ${itm.prizes[0].title} du jeu EduQuiz!`,
     winners: itm.winners.map((wnr) => ({
       msisdn: wnr.msisdn || wnr,
       points: wnr.points,

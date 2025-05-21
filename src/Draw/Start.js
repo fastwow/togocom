@@ -42,9 +42,9 @@ const Logo = () => {
       sx={{
         width: 64,
         height: 64,
-        backgroundColor: "white",
+        // backgroundColor: "white",
         borderRadius: 16,
-        boxShadow: 4,
+        // boxShadow: 4,
         padding: 2,
       }}
     >
@@ -110,7 +110,7 @@ const PrizeInfo = ({
               paddingRight: 4,
             }}
           >
-            Bienvenue au jeu ABLODE!
+            Bienvenue au jeu EduQuiz!
           </Box>
           <Box
             sx={{
@@ -123,7 +123,7 @@ const PrizeInfo = ({
               paddingRight: 4,
             }}
           >
-            ABLODE!
+            EduQuiz!
           </Box>
           <Box
             sx={{

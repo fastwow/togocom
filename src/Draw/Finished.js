@@ -38,9 +38,9 @@ const Logo = () => {
       sx={{
         width: 64,
         height: 64,
-        backgroundColor: "white",
+        // backgroundColor: "white",
         borderRadius: 16,
-        boxShadow: 4,
+        // boxShadow: 4,
         padding: 2,
       }}
     >
@@ -145,7 +145,7 @@ const PrizeInfo = ({ values, prize, date }) => {
           paddingRight: 4,
         }}
       >
-        ABLODE
+        EduQuiz
       </Box>
       <Box
         sx={{
@@ -184,7 +184,7 @@ const PrizeInfo = ({ values, prize, date }) => {
           paddingRight: 4,
         }}
       >
-        Pour plus d'informations, consulte: togocom.tg
+        Pour plus d'informations, consulte: yas.tg
       </Box>
       <Box
         sx={{
@@ -198,7 +198,7 @@ const PrizeInfo = ({ values, prize, date }) => {
           textDecoration: "underline",
         }}
       >
-        Les gagnants du concours ABLODE:  
+        Les gagnants du concours EduQuiz:  
       </Box>
 
       <Box
