@@ -10,9 +10,12 @@ export const CellRow = React.memo(({ values, size, onAnimateFinished }) => {
     if (!result?.length) {
       return [];
     }
-
-    result.push(undefined);
-    result.push(undefined);
+    if (values.length < 8) {
+      const remaining = 8 - values.length;
+      for (let i = 0; i < remaining; i++) {
+        result.push(undefined);
+      }
+    }
 
     return result;
   }, [values]);
