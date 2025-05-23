@@ -4,21 +4,25 @@ import { Typography } from "@mui/material";
 
 export const CellRow = React.memo(({ values, size, onAnimateFinished }) => {
   // convert string values to array of number
+  console.log("size", values);
+  
   const valuesToRender = React.useMemo(() => {
     const result = values?.msisdn?.split("").map((value) => parseInt(value));
 
     if (!result?.length) {
       return [];
     }
-    if (values.length < 8) {
-      const remaining = 8 - values.length;
+    if (values.length < size) {
+      const remaining = size - values.length;
       for (let i = 0; i < remaining; i++) {
         result.push(undefined);
       }
     }
 
     return result;
-  }, [values]);
+  }, [values, size]);
+
+  console.log("valuesToRender", valuesToRender);
 
   const [itemToRender, setItemToRender] = React.useState([]);
 
@@ -37,7 +41,7 @@ export const CellRow = React.memo(({ values, size, onAnimateFinished }) => {
   const onCellAnimateFinished = React.useCallback(() => {
     console.log("cell animate finished");
     setItemToRender((itemToRender) => {
-      if (itemToRender.length < valuesToRender.length - 2) {
+      if (itemToRender.length < valuesToRender.length) {
         console.log("celllrow animate next");
         return valuesToRender.slice(0, itemToRender.length + 1);
       } else {
@@ -178,6 +182,8 @@ const CellRows = ({ values, onAnimateFinished }) => {
 
   const ui = source;
 
+  const maxSize = Math.max(...values.map((item) => item?.msisdn?.length));
+
   return (
     <Box
       sx={{
@@ -199,7 +205,7 @@ const CellRows = ({ values, onAnimateFinished }) => {
           .map((_value, index) => (
             <CellRow
               values={ui[index]}
-              size={8}
+              size={maxSize}
               onAnimateFinished={onCellRowsAnimateFinished}
             />
           ))}
