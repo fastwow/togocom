@@ -22,7 +22,6 @@ const Draw = ({ lotteryData, type, onChangeType, onChangeDate }) => {
 
   return (
     <Box
-      // full screen
       sx={{
         position: "fixed",
         top: 0,
@@ -30,6 +29,7 @@ const Draw = ({ lotteryData, type, onChangeType, onChangeDate }) => {
         right: 0,
         bottom: 0,
         display: "flex",
+        overflowY: "auto"
       }}
     >
       {state === "drawAnnouncement" ? (

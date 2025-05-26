@@ -8,14 +8,19 @@ const App = () => {
   return (
     <Box
       sx={{
-        // full screen
-        position: "fixed",
+        // full screen with scrolling
+        position: "absolute", 
         top: 0,
         left: 0,
         right: 0,
-        bottom: 0,
+        minHeight: "100vh",
         display: "flex",
         backgroundImage: "url(/main_background.jpg)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
+        overflowY: "auto"
       }}
     >
       <Router>

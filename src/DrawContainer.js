@@ -68,7 +68,6 @@ const DrawContainer = ({ originalType }) => {
   if (isLoading) {
     return (
       <Box
-        // full screen and center
         sx={{
           position: "fixed",
           top: 0,
@@ -78,6 +77,7 @@ const DrawContainer = ({ originalType }) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          overflowY: "auto"
         }}
       >
         <Box
@@ -98,12 +98,14 @@ const DrawContainer = ({ originalType }) => {
   }
 
   return (
-    <Draw
-      lotteryData={data}
-      type={type}
-      onChangeType={onChangeType}
-      onChangeDate={onChangeDate}
-    />
+    <Box sx={{ height: "100%", overflowY: "auto" }}>
+      <Draw
+        lotteryData={data}
+        type={type}
+        onChangeType={onChangeType}
+        onChangeDate={onChangeDate}
+      />
+    </Box>
   );
 };
 
