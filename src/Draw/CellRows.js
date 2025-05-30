@@ -133,7 +133,7 @@ export const Cell = ({ value, onAnimateFinished }) => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        borderColor: "red",
+        borderColor: "#00377D",
         borderRadius: 2,
         borderWidth: 2,
         borderStyle: "solid",
@@ -144,7 +144,7 @@ export const Cell = ({ value, onAnimateFinished }) => {
         variant="h2"
         sx={{
           fontWeight: "bold",
-          color: "red",
+          color: "#00377D",
           // animation when value is changing. duration 5s
           transition: "all 5s",
         }}

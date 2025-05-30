@@ -10,7 +10,7 @@ const ShortCode = ({ code }) => {
   return (
     <Box
       sx={{
-        backgroundColor: "red",
+        backgroundColor: "#00377D",
         borderRadius: 2,
         boxShadow: 4,
         height: 48,
@@ -170,8 +170,8 @@ const PrizeInfo = ({
                 paddingBottom: 1,
                 paddingLeft: 8,
                 paddingRight: 8,
-                backgroundColor: isPending ? "red" : "white",
-                borderColor: "red",
+                backgroundColor: isPending ? "#00377D" : "white",
+                borderColor: "#00377D",
                 disabled: isPending,
                 borderWidth: 3,
                 borderRadius: 3,
@@ -179,9 +179,9 @@ const PrizeInfo = ({
                 // bold
                 fontWeight: "bold",
                 "&:hover": {
-                  backgroundColor: "red",
+                  backgroundColor: "#00377D",
                   color: "white",
-                  borderColor: "red",
+                  borderColor: "#00377D",
                   borderWidth: 3,
                   borderRadius: 3,
                   boxShadow: "none",
@@ -242,7 +242,7 @@ const PrizeInfo = ({
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              borderColor: "red",
+              borderColor: "#00377D",
               borderRadius: 1,
               borderWidth: 2,
               borderStyle: "solid",
@@ -273,7 +273,7 @@ const PrizeInfo = ({
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              borderColor: "red",
+              borderColor: "#00377D",
               borderRadius: 1,
               borderWidth: 2,
               borderStyle: "solid",
@@ -302,7 +302,7 @@ const PrizeInfo = ({
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              borderColor: "red",
+              borderColor: "#00377D",
               borderRadius: 1,
               borderWidth: 2,
               borderStyle: "solid",
@@ -330,7 +330,7 @@ const PrizeInfo = ({
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              borderColor: "red",
+              borderColor: "#00377D",
               borderRadius: 1,
               borderWidth: 2,
               borderStyle: "solid",
@@ -358,7 +358,7 @@ const PrizeInfo = ({
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              borderColor: "red",
+              borderColor: "#00377D",
               borderRadius: 1,
               borderWidth: 2,
               borderStyle: "solid",
@@ -406,9 +406,9 @@ const PrizeInfo = ({
               // change text color to red
               sx={{
                 color: "white",
-                backgroundColor: "red",
+                backgroundColor: "#00377D",
                 // add border color to red
-                borderColor: "red",
+                borderColor: "#00377D",
                 // add border width to 2
                 borderWidth: 2,
                 // add border style to solid
@@ -422,9 +422,9 @@ const PrizeInfo = ({
                 borderRadius: 3,
                 // hover effect
                 "&:hover": {
-                  backgroundColor: "red",
+                  backgroundColor: "#00377D",
                   color: "white",
-                  borderColor: "red",
+                  borderColor: "#00377D",
                 },
               }}
               onChange={onChangeSelectType}
@@ -446,9 +446,9 @@ const PrizeInfo = ({
                 // change text color to red
                 sx={{
                   color: "white",
-                  backgroundColor: "red",
+                  backgroundColor: "#00377D",
                   // add border color to red
-                  borderColor: "red",
+                  borderColor: "#00377D",
                   // add border width to 2
                   borderWidth: 2,
                   // add border style to solid
@@ -462,9 +462,9 @@ const PrizeInfo = ({
                   borderRadius: 3,
                   // hover effect
                   "&:hover": {
-                    backgroundColor: "red",
+                    backgroundColor: "#00377D",
                     color: "white",
-                    borderColor: "red",
+                    borderColor: "#00377D",
                   },
                 }}
                 onChange={onChangeSelectDate}

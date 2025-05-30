@@ -6,7 +6,7 @@ const ShortCode = ({ code }) => {
   return (
     <Box
       sx={{
-        backgroundColor: "red",
+        backgroundColor: "#00377D",
         borderRadius: 2,
         boxShadow: 4,
         height: 48,
@@ -93,7 +93,7 @@ const PrizeInfo = ({ values, date, prize, onAnimateFinished }) => {
         sx={{
           fontSize: 24,
           fontWeight: "bold",
-          color: "red",
+          color: "#00377D",
           textAlign: "center",
           lineHeight: "64px",
           paddingLeft: 4,

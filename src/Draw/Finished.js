@@ -6,7 +6,7 @@ const ShortCode = ({ code }) => {
   return (
     <Box
       sx={{
-        backgroundColor: "red",
+        backgroundColor: "#00377D",
         borderRadius: 2,
         boxShadow: 4,
         height: 48,
@@ -59,13 +59,13 @@ const Winner = ({ value }) => {
   return (
     <Box
       sx={{
-        backgroundColor: "red",
+        backgroundColor: "#00377D",
         height: 76,
         alignContent: "center",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        borderColor: "red",
+        borderColor: "#00377D",
         borderRadius: 2,
         borderWidth: 2,
         borderStyle: "solid",
